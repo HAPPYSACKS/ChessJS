@@ -5,6 +5,9 @@ import Pawn from "./Pawn.js";
 import Queen from "./Queen.js";
 import Rook from "./Rook.js";
 
+// svgs from chess pieces come from
+// https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
+
 export default class Chessboard {
   board;
   constructor() {
