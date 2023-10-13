@@ -57,7 +57,6 @@ export default class Chessboard {
           pieceImg.src = piece.displayedImage;
           square.appendChild(pieceImg);
         }
-        console.log(square);
         boardHTML.appendChild(square);
       }
     }
