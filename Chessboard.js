@@ -54,9 +54,10 @@ export default class Chessboard {
         let piece = this.board[row][col];
         if (piece) {
           let pieceImg = document.createElement("img");
-          pieceImg.src = piece.image;
+          pieceImg.src = piece.displayedImage;
           square.appendChild(pieceImg);
         }
+        console.log(square);
         boardHTML.appendChild(square);
       }
     }
