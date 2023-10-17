@@ -10,6 +10,9 @@ import Rook from "./Rook.js";
 
 export default class Chessboard {
   board;
+  currentPlayer;
+  selectedTile = null;
+  SelectedPiece = null;
   constructor() {
     this.board = Array(8)
       .fill(null)
@@ -17,6 +20,10 @@ export default class Chessboard {
   }
 
   isSpaceEmpty() {}
+
+  handleSquareClick(row, col) {
+    console.log(`${row}, ${col}`);
+  }
 
   initializeBoard() {
     // Initialize pawns
@@ -53,6 +60,10 @@ export default class Chessboard {
         let square = document.createElement("div");
         square.className = "square";
         square.id = `${String.fromCharCode(97 + col)}${8 - row}`; // a8, b8, ..., h1
+
+        square.addEventListener("click", () => {
+          this.handleSquareClick(row, col);
+        });
 
         let piece = this.board[row][col];
         if (piece) {
