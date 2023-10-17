@@ -12,16 +12,16 @@ export default class Chessboard {
   board;
   currentPlayer;
   selectedTile = null;
-  SelectedPiece = null;
+  selectedPiece = null;
+  capturedWhitePieces = [];
+  capturedBlackPieces = [];
   constructor() {
     this.board = Array(8)
       .fill(null)
       .map(() => Array(8).fill(null));
   }
 
-  findPieceAt(row, col) {
-
-  }
+  findPieceAt(row, col) {}
 
   handleSquareClick(row, col) {
     // console.log(`${row}, ${col}`);
@@ -53,6 +53,12 @@ export default class Chessboard {
     this.board[7][5] = new Bishop("black", { row: 7, col: 5 });
     this.board[7][3] = new Queen("black", { row: 7, col: 3 });
     this.board[7][4] = new King("black", { row: 7, col: 4 });
+  }
+
+  updateCapturedPieces() {
+    // let capturedWhite = document.getElementById("captured-white");
+    // let capturedBlack = document.getElementById("captured-black");
+    
   }
 
   renderBoard() {

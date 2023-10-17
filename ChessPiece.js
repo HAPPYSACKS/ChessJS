@@ -22,10 +22,13 @@ export default class chessPiece {
 
   isValidMove(targetPosition) {
     // Basic logic or overridden by derived classes
-    return true;
   }
 
-  move(newPosition) {}
+  move(newPosition) {
+    // Basic logic or overridden by derived classes
+  }
 
-  capture(piece) {}
+  capture(piece) {
+    // Basic logic or overridden by derived classes
+  }
 }
