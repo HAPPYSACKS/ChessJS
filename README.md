@@ -6,7 +6,7 @@
 
 ## Target Platform
 
-Both desktop and mobile (and traditionally, physical boards)
+Both desktop and mobile
 
 ## Game Genre
 
@@ -30,6 +30,7 @@ The primary goal of the game is to put the opponent's king into a position known
 - Special moves include:
   - **Castling:** A move involving the king and either of the original rooks (not moved in the game) in which the king is moved two squares towards a rook on its initial square, then that rook is moved to the square the king skipped.
   - **Pawn Promotion:** When a pawn advances all the way to its eighth rank, it is then promoted and must be exchanged for the player's choice of queen, rook, bishop, or knight.
+  - **First Pawn Movement:** A pawn can move 2 tiles on its first time moving.
   - **En passant:** A pawn capturing move that arises when a pawn makes a two-square move from its starting square and lands beside an opponent's pawn.
 
 ## Game Mechanics
