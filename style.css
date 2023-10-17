@@ -26,10 +26,15 @@ body {
 
 .player-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .playername {
   color: #fff2d8;
+}
+
+.captured-pieces {
+  display: flex;
+  align-items: flex-start;
 }
 
 #player-top {

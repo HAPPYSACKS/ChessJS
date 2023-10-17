@@ -19,10 +19,12 @@ export default class Chessboard {
       .map(() => Array(8).fill(null));
   }
 
-  isSpaceEmpty() {}
+  findPieceAt(row, col) {
+
+  }
 
   handleSquareClick(row, col) {
-    console.log(`${row}, ${col}`);
+    // console.log(`${row}, ${col}`);
   }
 
   initializeBoard() {
