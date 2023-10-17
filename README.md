@@ -39,4 +39,24 @@ The primary goal of the game is to put the opponent's king into a position known
 - The goal is to use your pieces to attack your opponent's king, while also protecting your own king from attack.
 - Each type of piece has its own way of moving on the 8x8 board.
 - Players capture opponent's pieces by moving one of their pieces into a square occupied by an opponent's piece.
-- The game continues until one player's king is checkmated, one player resigns, or the game ends in a draw (e.g., stalemate, threefold repetition, fifty-move rule without a pawn move or capture).
+- The game continues until one player's king is checkmated, one player resigns, or the game ends in a draw (e.g., stalemate).
+
+## Game States in Chess
+
+### Check
+
+"Check" is a situation where the current player's king is under direct threat of capture on the next opponent's move. When a player's king is in check, they must make a move to get out of check. This can be accomplished by:
+
+1. Moving the king to a safe square.
+2. Capturing the threatening piece.
+3. Blocking the path of the threatening piece (if applicable, e.g., in case of a threat from a rook, bishop, or queen).
+
+**Note**: A player cannot make a move that places or leaves their own king in check.
+
+### Checkmate
+
+"Checkmate" occurs when a player's king is in check and there is no legal move they can make to get the king out of check. In this situation, the game ends immediately, and the player whose king is checkmated loses. The objective of chess is to checkmate the opponent's king.
+
+### Stalemate
+
+A "stalemate" occurs when it is a player's turn to move, but they have no legal moves available, and their king is not in check. Unlike checkmate, where the player in check loses, a stalemate results in the game ending in a draw. This means that neither player wins or loses. Stalemates can occur in various board situations and are sometimes used as a defensive strategy when a player is at a disadvantage but can force a position where the opponent has no legal moves.
