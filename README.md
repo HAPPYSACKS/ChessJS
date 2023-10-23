@@ -21,14 +21,19 @@ The primary goal of the game is to put the opponent's king into a position known
 - The game starts with each player controlling an army of pieces, including one king, one queen, two rooks, two knights, two bishops, and eight pawns.
 - Each type of piece moves differently:
 
-  - **Pawns** move forward but capture diagonally.
+  - **Pawns** move forward 1 tile but capture diagonally. On their first turn, pawns have the ability to move 2 tiles.
     ![Chess Pawn Movements](https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif)
 
   - **Rooks** move horizontally or vertically any number of squares.
-  - **Knights** move in an L-shape: two squares in one direction and then one square perpendicular to that (or vice versa).
+    ![Chess Rook Movements](https://upload.wikimedia.org/wikipedia/commons/5/54/Rook_%28chess%29_movements.gif)
+  - **Knights** move in an L-shape: two squares in one direction and then one square perpendicular to that (or vice versa). Knights are the only piece in the game that can move through other units.
+    ![Chess Knight Movements](https://upload.wikimedia.org/wikipedia/commons/0/0b/Knight_%28chess%29_movements.gif)
   - **Bishops** move diagonally any number of squares.
+    ![Chess Bishop Movements](https://upload.wikimedia.org/wikipedia/commons/8/86/Bishop_%28chess%29_movements.gif)
   - **Queens** combine the power of a rook and bishop and can move any number of squares in a straight line: horizontally, vertically, or diagonally.
+    ![Chess Queen Movements](https://upload.wikimedia.org/wikipedia/commons/5/55/Queen_%28chess%29_movements.gif)
   - **Kings** move one square in any direction.
+    ![Chess King Movements](https://upload.wikimedia.org/wikipedia/commons/f/f2/King_%28chess%29_movements.gif)
 
 - A player can't make a move that would put or leave their own king in check.
 - Special moves include:
@@ -69,12 +74,12 @@ A "stalemate" occurs when it is a player's turn to move, but they have no legal 
 
 The following chess piece movement GIFs used in this document are licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license:
 
-- Chess Pawn Movements GIF: [Link to GIF](https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif)
-- Chess Rook Movements GIF: [Link to GIF](URL)
-- Chess Knight Movements GIF: [Link to GIF](URL)
-- Chess Bishop Movements GIF: [Link to GIF](URL)
-- Chess Queen Movements GIF: [Link to GIF](URL)
-- Chess King Movements GIF: [Link to GIF](URL)
+- Chess Pawn Movements GIF: ![Chess Pawn Movements](https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif) [Link to GIF](https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif)
+- Chess Rook Movements GIF: ![Chess Rook Movements](https://upload.wikimedia.org/wikipedia/commons/5/54/Rook_%28chess%29_movements.gif) [Link to GIF](https://upload.wikimedia.org/wikipedia/commons/5/54/Rook_%28chess%29_movements.gif)
+- Chess Knight Movements GIF: ![Chess Knight Movements](https://upload.wikimedia.org/wikipedia/commons/0/0b/Knight_%28chess%29_movements.gif) [Link to GIF](https://upload.wikimedia.org/wikipedia/commons/0/0b/Knight_%28chess%29_movements.gif)
+- Chess Bishop Movements GIF: ![Chess Bishop Movements](https://upload.wikimedia.org/wikipedia/commons/8/86/Bishop_%28chess%29_movements.gif) [Link to GIF](https://upload.wikimedia.org/wikipedia/commons/8/86/Bishop_%28chess%29_movements.gif)
+- Chess Queen Movements GIF: ![Chess Queen Movements](https://upload.wikimedia.org/wikipedia/commons/5/55/Queen_%28chess%29_movements.gif) [Link to GIF](https://upload.wikimedia.org/wikipedia/commons/5/55/Queen_%28chess%29_movements.gif)
+- Chess King Movements GIF: ![Chess King Movements](https://upload.wikimedia.org/wikipedia/commons/f/f2/King_%28chess%29_movements.gif) [Link to GIF](https://upload.wikimedia.org/wikipedia/commons/f/f2/King_%28chess%29_movements.gif)
 
 These works were created by the copyright holder who published them under the following license:
 
