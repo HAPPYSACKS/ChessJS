@@ -20,13 +20,16 @@ The primary goal of the game is to put the opponent's king into a position known
 
 - The game starts with each player controlling an army of pieces, including one king, one queen, two rooks, two knights, two bishops, and eight pawns.
 - Each type of piece moves differently:
+
   - **Pawns** move forward but capture diagonally.
-    ![Pawn Movement]("https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif")
+    ![Chess Pawn Movements](https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif)
+
   - **Rooks** move horizontally or vertically any number of squares.
   - **Knights** move in an L-shape: two squares in one direction and then one square perpendicular to that (or vice versa).
   - **Bishops** move diagonally any number of squares.
   - **Queens** combine the power of a rook and bishop and can move any number of squares in a straight line: horizontally, vertically, or diagonally.
   - **Kings** move one square in any direction.
+
 - A player can't make a move that would put or leave their own king in check.
 - Special moves include:
   - **Castling:** A move involving the king and either of the original rooks (not moved in the game) in which the king is moved two squares towards a rook on its initial square, then that rook is moved to the square the king skipped.
