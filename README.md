@@ -21,7 +21,7 @@ The primary goal of the game is to put the opponent's king into a position known
 - The game starts with each player controlling an army of pieces, including one king, one queen, two rooks, two knights, two bishops, and eight pawns.
 - Each type of piece moves differently:
 
-  - **Pawns** move forward 1 tile but capture diagonally. On their first turn, pawns  have the ability to move 2 tiles.
+  - **Pawns** move forward 1 tile but capture diagonally. On their first turn, pawns have the ability to move 2 tiles.
     ![Chess Pawn Movements](https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif)
 
   - **Rooks** move horizontally or vertically any number of squares.
@@ -90,3 +90,23 @@ Under the following conditions:
 
 - Attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 - Share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original.
+
+## License and Attribution for Chess Piece SVGs
+
+The SVGs used for the chess pieces in this web-based chess game were created by Cburnett and are licensed under the following terms:
+
+GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled GNU Free Documentation License.
+
+Creative Commons Attribution-Share Alike 3.0 Unported license. Under this license, you are free to:
+
+- Share – to copy, distribute, and transmit the work.
+- Remix – to adapt the work.
+
+Under the following conditions:
+
+- Attribution – You must give appropriate credit to Cburnett, provide a link to the license, and indicate if changes were made. Since no changes were made, you can state that the work is used as is.
+- Share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original.
+
+GNU General Public License, either version 2 of the License or any later version. This work is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.
+
+You may select the license of your choice.
