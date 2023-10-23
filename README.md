@@ -64,3 +64,24 @@ The primary goal of the game is to put the opponent's king into a position known
 ### Stalemate
 
 A "stalemate" occurs when it is a player's turn to move, but they have no legal moves available, and their king is not in check. Unlike checkmate, where the player in check loses, a stalemate results in the game ending in a draw. This means that neither player wins or loses. Stalemates can occur in various board situations and are sometimes used as a defensive strategy when a player is at a disadvantage but can force a position where the opponent has no legal moves.
+
+## License and Attribution
+
+The following chess piece movement GIFs used in this document are licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license:
+
+- Chess Pawn Movements GIF: [Link to GIF](https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif)
+- Chess Rook Movements GIF: [Link to GIF](URL)
+- Chess Knight Movements GIF: [Link to GIF](URL)
+- Chess Bishop Movements GIF: [Link to GIF](URL)
+- Chess Queen Movements GIF: [Link to GIF](URL)
+- Chess King Movements GIF: [Link to GIF](URL)
+
+These works were created by the copyright holder who published them under the following license:
+
+- You are free to share – to copy, distribute, and transmit the work.
+- You are free to remix – to adapt the work.
+
+Under the following conditions:
+
+- Attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- Share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original.
