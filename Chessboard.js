@@ -55,10 +55,7 @@ export default class Chessboard {
     this.board[7][4] = new King("black", { row: 7, col: 4 });
   }
 
-  updateCapturedPieces() {
-    // let capturedWhite = document.getElementById("captured-white");
-    // let capturedBlack = document.getElementById("captured-black");
-    
+  updateCapturedPieces() {    
   }
 
   renderBoard() {
