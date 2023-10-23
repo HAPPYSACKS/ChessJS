@@ -9,7 +9,6 @@ export default class chessPiece {
     this.color = color;
     this.position = position;
     this.setDisplayedImage();
-    console.log(this.displayedImage);
   }
 
   setDisplayedImage() {
@@ -28,7 +27,13 @@ export default class chessPiece {
     // Basic logic or overridden by derived classes
   }
 
-  capture(piece) {
+  canCapture(targetPosition) {
     // Basic logic or overridden by derived classes
   }
+
+  capture(targetPiece) {
+    // Notify GameLogic about the capture    
+    // Add any other piece-specific logic if needed (e.g., special effects, sounds)
+}
+
 }

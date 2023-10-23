@@ -5,16 +5,11 @@ import Pawn from "./Pawn.js";
 import Queen from "./Queen.js";
 import Rook from "./Rook.js";
 
-// svgs from chess pieces come from
-// https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
-
 export default class Chessboard {
   board;
   currentPlayer;
   selectedTile = null;
   selectedPiece = null;
-  capturedWhitePieces = [];
-  capturedBlackPieces = [];
   constructor() {
     this.board = Array(8)
       .fill(null)
@@ -55,7 +50,8 @@ export default class Chessboard {
     this.board[7][4] = new King("black", { row: 7, col: 4 });
   }
 
-  updateCapturedPieces() {    
+  removePiece(position) {
+    // set position to null
   }
 
   renderBoard() {
