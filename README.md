@@ -21,7 +21,7 @@ The primary goal of the game is to put the opponent's king into a position known
 - The game starts with each player controlling an army of pieces, including one king, one queen, two rooks, two knights, two bishops, and eight pawns.
 - Each type of piece moves differently:
 
-  - **Pawns** move forward 1 tile but capture diagonally. On their first turn, pawns have the ability to move 2 tiles.
+  - **Pawns** move forward 1 tile but capture diagonally. On their first turn, pawns  have the ability to move 2 tiles.
     ![Chess Pawn Movements](https://upload.wikimedia.org/wikipedia/commons/b/b8/Pawn_%28chess%29_movements.gif)
 
   - **Rooks** move horizontally or vertically any number of squares.
@@ -38,9 +38,9 @@ The primary goal of the game is to put the opponent's king into a position known
 - A player can't make a move that would put or leave their own king in check.
 - Special moves include:
   - **Castling:** A move involving the king and either of the original rooks (not moved in the game) in which the king is moved two squares towards a rook on its initial square, then that rook is moved to the square the king skipped.
-  - **Pawn Promotion:** When a pawn advances all the way to its eighth rank, it is then promoted and must be exchanged for the player's choice of queen, rook, bishop, or knight.
+  - **Pawn Promotion:** When a pawn advances all the way to the opponent's last tile, it is then promoted and must be exchanged for the player's choice of queen, rook, bishop, or knight.
   - **First Pawn Movement:** A pawn can move 2 tiles on its first time moving.
-  - **En passant:** A pawn capturing move that arises when a pawn makes a two-square move from its starting square and lands beside an opponent's pawn.
+  - **En passant:** A pawn capturing move that arises when a pawn makes a two-square move from its starting square and lands beside an opponent's pawn. As a result, the opposing pawn can capture the pawn that moved 2 squares.
 
 ## Game Mechanics
 
