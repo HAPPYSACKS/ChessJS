@@ -14,7 +14,7 @@ Strategy
 
 ## Game's Objective
 
-The primary goal of the game is to put the opponent's king into a position known as "checkmate" where the king is in a position to be captured (in "check") and there is no move the opponent can make to move the king out of check. The game can also end in a draw under specific conditions, like stalemate.
+The primary goal of the game is to put the opponent's king into a position known as "checkmate" where the king is in a position to be captured and there is no move the opponent can make to move the king out of being captured. The game can also end in a draw under specific conditions, like stalemate (where the King can't move, but it is in no position to be captured).
 
 ## Rules of the Game
 
