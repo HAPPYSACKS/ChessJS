@@ -6,7 +6,7 @@
 
 ## Target Platform
 
-Both desktop and mobile
+Desktop
 
 ## Game Genre
 
