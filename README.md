@@ -119,7 +119,7 @@ You may select the license of your choice.
 
 ## Icon Assets
 
-Settings Icon: ![Settings Icon] (https://iconduck.com/icons/252581/settings-alt-2)
-Restart Icon: ![Restart Icon] (https://iconduck.com/icons/186303/rotate)
-Undo Icon: ![Undo Icon] (https://iconduck.com/icons/313605/navigate-far-before)
-Redo Icon: ![Redo Icon] (https://iconduck.com/icons/313601/navigate-far-next)
+![Settings Icon](https://iconduck.com/icons/252581/settings-alt-2)
+![Restart Icon](https://iconduck.com/icons/186303/rotate)
+![Undo Icon](https://iconduck.com/icons/313605/navigate-far-before)
+![Redo Icon](https://iconduck.com/icons/313601/navigate-far-next)
