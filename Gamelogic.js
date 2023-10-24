@@ -73,6 +73,8 @@ export default class Gamelogic {
     // Stop Timer for player
     // Switch player after a move or capture
     // Start Timer for swapped player
+
+    
   }
 
   pieceCaptured(capturingPiece, capturedPiece) {
