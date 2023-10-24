@@ -49,6 +49,8 @@ The primary goal of the game is to put the opponent's king into a position known
 - Each type of piece has its own way of moving on the 8x8 board.
 - Players capture opponent's pieces by moving one of their pieces into a square occupied by an opponent's piece.
 - The game continues until one player's king is checkmated, one player resigns, or the game ends in a draw (e.g., stalemate).
+- Each player has a total time of 10 minutes to make all their moves. On their turn, the timer will count down. When one of the timers reach 0, the player whose timer reaches 0 wil lose.
+- White will always start the game first.
 
 ## Game States in Chess
 
@@ -69,6 +71,10 @@ The primary goal of the game is to put the opponent's king into a position known
 ### Stalemate
 
 A "stalemate" occurs when it is a player's turn to move, but they have no legal moves available, and their king is not in check. Unlike checkmate, where the player in check loses, a stalemate results in the game ending in a draw. This means that neither player wins or loses. Stalemates can occur in various board situations and are sometimes used as a defensive strategy when a player is at a disadvantage but can force a position where the opponent has no legal moves.
+
+### Timeout
+
+"Timeout" occurs when one player runs out of time based on the time controls set for the game. If a player's time runs out before they complete their move, they lose the game due to timeout. It's essential for players to manage their time effectively to avoid losing by this condition.
 
 ## License and Attribution
 

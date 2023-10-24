@@ -61,10 +61,12 @@ body {
 
 #player-top {
   padding-bottom: 2vh;
+  display: flex;
 }
 
 #player-bottom {
   padding-top: 2vh;
+  display: flex;
 }
 
 .player-icon {
@@ -74,15 +76,22 @@ body {
   padding-right: 1.5vh;
 }
 
+.player-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Styles for the Sidebar Action Bar */
 #action-bar {
   margin-top: 13vh;
   padding-left: 1.5em;
   display: flex;
   flex-direction: column;
-
-  border-left: 1px solid #bca37f;
   height: 75vh;
+}
+
+.timer {
+  color: #fff2d8;
 }
 
 .icon {
@@ -93,8 +102,6 @@ body {
   cursor: pointer;
   position: relative;
 }
-
-
 
 /* Alternate color for square spaces */
 

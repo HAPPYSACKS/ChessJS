@@ -11,6 +11,8 @@ export default class Gamelogic {
   constructor(chessboard) {
     this.chessboard = chessboard;
     this.currentPlayer = "white";
+    this.whiteTimeRemaining = 600; // 10 minutes in seconds
+    this.blackTimeRemaining = 600; // 10 minutes in seconds
   }
 
   isCheck() {}
@@ -32,29 +34,38 @@ export default class Gamelogic {
     }
 
     this.timer = setInterval(() => {
-      // Decrement the time for the current player
-      // Assuming you have some time storage like:
-      // this.whiteTimeRemaining and this.blackTimeRemaining
-
+      let timerElement;
       if (this.currentPlayer === "white") {
         this.whiteTimeRemaining--;
+        timerElement = document.getElementById("white-timer");
 
         if (this.whiteTimeRemaining <= 0) {
           clearInterval(this.timer);
           // Handle game over due to time running out
-          // e.g., display message, end game, etc.
         }
       } else {
         this.blackTimeRemaining--;
+        timerElement = document.getElementById("black-timer");
 
         if (this.blackTimeRemaining <= 0) {
           clearInterval(this.timer);
           // Handle game over due to time running out
-          // e.g., display message, end game, etc.
         }
       }
 
-      // Optionally, you can also update the UI with the new time values here
+      const minutes = Math.floor(
+        this.currentPlayer === "white"
+          ? this.whiteTimeRemaining / 60
+          : this.blackTimeRemaining / 60
+      );
+      const seconds =
+        (this.currentPlayer === "white"
+          ? this.whiteTimeRemaining
+          : this.blackTimeRemaining) % 60;
+
+      timerElement.textContent = `${minutes
+        .toString()
+        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     }, 1000);
   }
 
@@ -73,8 +84,6 @@ export default class Gamelogic {
     // Stop Timer for player
     // Switch player after a move or capture
     // Start Timer for swapped player
-
-    
   }
 
   pieceCaptured(capturingPiece, capturedPiece) {
