@@ -8,29 +8,87 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="board-nav">
-      <div>
-        <div id="player-top">
-          <div class="player-container">
-            <img class="player-icon" src="avatar.jpeg" alt="" />
-            <div class="player-info">
-              <span class="playername">Player 1</span>
-              <div class="captured-pieces" id="captured-white"></div>
+    <div class="main">
+      <div class="wrapper">
+        <div id="board-nav">
+          <div>
+            <div id="player-top">
+              <div class="player-container">
+                <img class="player-icon" src="avatar.jpeg" alt="" />
+                <div class="player-info">
+                  <span class="playername">Player 1</span>
+                  <div class="captured-pieces" id="captured-white"></div>
+                </div>
+              </div>
+            </div>
+            <div id="chessboard"></div>
+            <div id="player-bottom">
+              <div class="player-container">
+                <img class="player-icon" src="avatar2.jpeg" alt="" />
+                <div class="player-info">
+                  <span class="playername" id="captured-black">Player 2</span>
+                  <div class="captured-pieces"></div>
+                </div>
+              </div>
             </div>
           </div>
+          <div id="messages"></div>
         </div>
-        <div id="chessboard"></div>
-        <div id="player-bottom">
-          <div class="player-container">
-            <img class="player-icon" src="avatar2.jpeg" alt="" />
-            <div class="player-info">
-              <span class="playername" id="captured-black">Player 2</span>
-              <div class="captured-pieces"></div>
-            </div>
-          </div>
+        <div id="action-bar">
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10.539 3.563a2 2 0 0 1 2.922 0l.789.844a2 2 0 0 0 1.528.633l1.154-.039A2 2 0 0 1 19 7.068l-.04 1.154a2 2 0 0 0 .634 1.528l.844.789a2 2 0 0 1 0 2.922l-.844.789a2 2 0 0 0-.633 1.528L19 16.932A2 2 0 0 1 16.932 19l-1.154-.04a2 2 0 0 0-1.528.634l-.789.844a2 2 0 0 1-2.922 0l-.789-.844a2 2 0 0 0-1.528-.633L7.068 19A2 2 0 0 1 5 16.932l.04-1.154a2 2 0 0 0-.634-1.528l-.844-.789a2 2 0 0 1 0-2.922l.844-.789a2 2 0 0 0 .633-1.528L5 7.068A2 2 0 0 1 7.068 5l1.154.04a2 2 0 0 0 1.528-.634l.789-.844z"
+            ></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <svg
+            class="icon"
+            enable-background="new 0 0 64 64"
+            height="64"
+            viewBox="0 0 64 64"
+            width="64"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m30 2c0 1.104.896 2 2 2 7.479 0 14.51 2.913 19.798 8.202 5.289 5.288 8.202 12.319 8.202 19.798 0 7.381-2.842 14.323-8 19.587v-5.587c0-1.104-.896-2-2-2s-2 .896-2 2v12h12c1.104 0 2-.896 2-2s-.896-2-2-2h-4.776c5.661-5.968 8.776-13.743 8.776-22 0-8.547-3.329-16.583-9.374-22.627-6.043-6.044-14.079-9.373-22.626-9.373-1.104 0-2 .896-2 2z"
+            />
+            <path
+              d="m9.374 54.627c6.043 6.044 14.079 9.373 22.626 9.373 1.104 0 2-.896 2-2s-.896-2-2-2c-7.479 0-14.51-2.913-19.798-8.202-5.289-5.288-8.202-12.319-8.202-19.798 0-7.381 2.842-14.323 8-19.587v5.587c0 1.104.896 2 2 2s2-.896 2-2v-12h-12c-1.104 0-2 .896-2 2s.896 2 2 2h4.776c-5.661 5.968-8.776 13.743-8.776 22 0 8.547 3.329 16.583 9.374 22.627z"
+            />
+          </svg>
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          >
+            <path
+              d="m14 6-1.41 1.41L17.17 12l-4.58 4.59L14 18l6-6zM6 6 4.59 7.41 9.17 12l-4.58 4.59L6 18l6-6z"
+            />
+          </svg>
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          >
+            <path
+              d="M11.41 7.41 10 6l-6 6 6 6 1.41-1.41L6.83 12zm8 0L18 6l-6 6 6 6 1.41-1.41L14.83 12z"
+            />
+          </svg>
         </div>
       </div>
-      <div id="messages"></div>
     </div>
 
     <script src="app.js" type="module"></script>
