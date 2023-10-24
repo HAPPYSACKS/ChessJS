@@ -8,8 +8,5 @@ export default class Pawn extends chessPiece {
     super(color, position); 
     this.setDisplayedImage(); 
   }
-  promote() {}
-  move(newPosition) {}
-  capture(piece) {}
-  isValidMove(newPosition) {}
+  canPromote() {}
 }
