@@ -29,18 +29,41 @@ export default class Gamelogic {
   }
 
   isCheck() {
-    // check every tile and
+    // Identify the position of the king for the current player.
+    // For every piece of the opposing player, check if they can move to the king's position.
+    // If any opposing piece can legally move to the king's position, the king is in "check".
   }
 
-  isCheckMate() {}
+  isCheckMate() {
+    // Start by determining if the king is in "check" using the method above.
+    // If the king is in check, then:
+    // Determine all the legal moves for the king.
+    // For each legal move:
+    // Simulate that move.
+    // Check if the king is still in "check" in that simulated position.
+    // If the king is in check in every simulated position, move on to step 3.
+    // For every piece of the current player:
+    // Simulate all their legal moves.
+    // After each simulated move, check if the king is still in "check".
+    // If no piece can make a move that removes the "check" on the king, it's "checkmate".
+  }
 
-  isStaleMate() {}
+  isStaleMate() {
+    // Ensure the current player's king is not in check. If the king is in check, it's not a stalemate.
+    // Loop through all the pieces of the current player.
+    // For each piece, generate all potential moves.
+    // For each potential move, simulate it and check if the move results in a self-check. If not, then the move is valid.
+    // If you find at least one valid move, it's not a stalemate.
+    // If you go through all the pieces and all potential moves and don't find any valid move, then it's a stalemate.
+  }
 
   switchPlayer() {
     this.currentPlayer = this.currentPlayer === "white" ? "black" : "white";
   }
 
-  onPieceCaptured() {}
+  onPieceCaptured(data) {
+    // run pieceCaptured method
+  }
 
   promotePawn() {}
 

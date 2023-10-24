@@ -8,5 +8,7 @@ export default class Pawn extends chessPiece {
     super(color, position); 
     this.setDisplayedImage(); 
   }
-  canPromote() {}
+  canPromote() { 
+    // Just promote to queen for now.
+  }
 }
