@@ -8,4 +8,7 @@ export default class King extends chessPiece {
     super(color, position); 
     this.setDisplayedImage(); 
   }
+  canCapture() {
+    
+  }
 }

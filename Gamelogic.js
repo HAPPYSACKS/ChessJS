@@ -14,8 +14,23 @@ export default class Gamelogic {
     this.whiteTimeRemaining = 600; // 10 minutes in seconds
     this.blackTimeRemaining = 600; // 10 minutes in seconds
   }
+  listeners = [];
 
-  isCheck() {}
+  registerListener(listener) {
+    this.listeners.push(listener);
+  }
+
+  notifyListeners(event, data) {
+    for (let listener of this.listeners) {
+      if (typeof listener[event] === "function") {
+        listener[event](data);
+      }
+    }
+  }
+
+  isCheck() {
+    // check every tile and
+  }
 
   isCheckMate() {}
 
@@ -24,6 +39,8 @@ export default class Gamelogic {
   switchPlayer() {
     this.currentPlayer = this.currentPlayer === "white" ? "black" : "white";
   }
+
+  onPieceCaptured() {}
 
   promotePawn() {}
 
