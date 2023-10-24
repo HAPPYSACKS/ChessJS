@@ -9,6 +9,6 @@ export default class Pawn extends chessPiece {
     this.setDisplayedImage(); 
   }
   canPromote() { 
-    // Just promote to queen for now.
+    // maybe implement, depending on if needed, or using listeners to implement this.
   }
 }

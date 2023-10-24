@@ -65,7 +65,12 @@ export default class Gamelogic {
     // run pieceCaptured method
   }
 
-  promotePawn() {}
+  promotePawn() {
+    //     After a pawn moves, check its rank.
+    // If it's a white pawn on the 8th rank or a black pawn on the 1st rank, then it's eligible for promotion.
+    // Prompt the player to choose a piece for promotion: queen, rook, bishop, or knight.
+    // Replace the pawn on the board with the chosen piece.
+  }
 
   startTimer() {
     // Ensure any existing timer is cleared first
