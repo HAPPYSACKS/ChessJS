@@ -122,19 +122,43 @@ export default class Gamelogic {
 
   movePiece(currentPosition, newPosition) {
     // get chess piece at 'current position'
+    selectedChessPiece = findPieceAt(currentPosition.row, currentPosition.col);
     // Check if the move to 'new position' is valid
-    // Then check if there's a piece on the target square
-    // if there's a piece at the target square and it's the opposing color, then capture it
-    // Update the position of the moving piece to the new position
+    if (selectedChessPiece.isValidMove(newPosition)) {
+      // Then check if there's a piece on the target square
+      // if there's a piece at the target square and it's the opposing color, then capture it
+      let targetPiece = this.chessboard.findPieceAt(newPosition);
+
+      if (
+        targetPiece &&
+        selectedChessPiece.color !== targetPiece.color &&
+        selectedChessPiece.canCapture(newPosition)
+      ) {
+        this.pieceCaptured(selectedChessPiece, targetPiece);
+      }
+      // Update the position of the moving piece to the new position
+      selectedChessPiece.position.row = newPosition.row;
+      selectedChessPiece.position.col = newPosition.col;
+      // Be careful of this, ensure it actually copies the currentPosition to newPosition and deletes the currentPosition after.
+      this.chessboard[newPosition.row][newPosition.col] = selectedChessPiece;
+      this.chessboard[currentPosition.row][currentPosition.col] = null;
+    }
+
     // Stop Timer for player
+    this.stopTimer();
     // Switch player after a move or capture
+    this.switchPlayer();
     // Start Timer for swapped player
+    this.startTimer();
   }
 
   pieceCaptured(capturingPiece, capturedPiece) {
     // Remove the captured piece from the board
+    chessboard[capturedPiece.position.row][capturedPiece.position.col] = null;
     // Add the captured piece to a captured pieces area
+    this.addCapturedPieceToDisplay(capturedPiece);
     // Handle any other game consequences of the capture
+
     // Check for:
     // pawn promotion
     // checkmate
@@ -144,10 +168,27 @@ export default class Gamelogic {
   addCapturedPieceToDisplay(capturedPiece) {
     // Check if captured display is white or black, push
     // into the array of the respective colors
+
+    if (capturedPiece.color === "white") {
+      this.capturedWhitePieces.push(capturedPiece);
+    } else {
+      this.capturedBlackPieces.push(capturedPiece);
+    }
+
     // Get regions of DOM that correspond to each capture area
     // id "captured-white" or "captured-black"
+    let displayArea;
+    if (capturedPiece.color === "white") {
+      displayArea = document.getElementById("captured-white");
+    } else {
+      displayArea = document.getElementById("captured-black");
+    }
+
     // Create an img element for captured element
+    let pieceImg = document.createElement("img");
     // Set the src attribute to the capturedPiece.displayedImage
+    pieceImg.src = capturedPiece.displayedImg;
     // Append created image to capture area.
+    displayArea.appendChild(pieceImg);
   }
 }

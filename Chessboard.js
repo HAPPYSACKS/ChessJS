@@ -19,7 +19,7 @@ export default class Chessboard {
   findPieceAt(row, col) {}
 
   handleSquareClick(row, col) {
-    // console.log(`${row}, ${col}`);
+    console.log(`${row}, ${col}`);
   }
 
   initializeBoard() {
