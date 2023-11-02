@@ -16,7 +16,7 @@ export default class Pawn extends chessPiece {
     // Basic logic or overridden by derived classes
     let possibleMoves = [];
 
-    if ((this, color === "white" && this.firstMove)) {
+    if (this.color === "white" && this.firstMove) {
       possibleMoves.push({
         row: this.position.row - 2,
         col: this.position.col,
@@ -30,24 +30,28 @@ export default class Pawn extends chessPiece {
       });
     }
 
-    if ((this, color === "black" && this.firstMove)) {
+    if (this.color === "black" && this.firstMove) {
       possibleMoves.push({
         row: this.position.row + 2,
         col: this.position.col,
       });
     }
 
-    if (this.color === "white") {
+    if (this.color === "black") {
       possibleMoves.push({
         row: this.position.row + 1,
         col: this.position.col,
       });
     }
+    return possibleMoves;
   }
 
   isValidMove(targetPosition) {
     let possibleMoves = this.returnPossibleMoves();
 
-    return possibleMoves.includes(targetPosition);
+    return possibleMoves.some(
+      (move) =>
+        move.row === targetPosition.row && move.col === targetPosition.col
+    );
   }
 }

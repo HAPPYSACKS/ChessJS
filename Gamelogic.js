@@ -1,5 +1,5 @@
 // Handles gamerules, player turns, and checks for specific states like check, checkmate, or stalemate.
-export default class Gamelogic {
+export default class Gamelogic extends Observer {
   currentPlayer;
   chessboard;
   timer;
@@ -14,7 +14,6 @@ export default class Gamelogic {
     this.whiteTimeRemaining = 600; // 10 minutes in seconds
     this.blackTimeRemaining = 600; // 10 minutes in seconds
   }
-  listeners = [];
 
   registerListener(listener) {
     this.listeners.push(listener);
@@ -150,6 +149,7 @@ export default class Gamelogic {
     this.switchPlayer();
     // Start Timer for swapped player
     this.startTimer();
+    this.chessboard.renderBoard();
   }
 
   pieceCaptured(capturingPiece, capturedPiece) {

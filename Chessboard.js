@@ -5,7 +5,7 @@ import Pawn from "./Pawn.js";
 import Queen from "./Queen.js";
 import Rook from "./Rook.js";
 
-export default class Chessboard {
+export default class Chessboard extends Observable {
   board;
   currentPlayer;
   selectedTile = null;
@@ -16,7 +16,9 @@ export default class Chessboard {
       .map(() => Array(8).fill(null));
   }
 
-  findPieceAt(row, col) {}
+  findPieceAt(row, col) {
+    return this.board[row][col];
+  }
 
   handleSquareClick(row, col) {
     console.log(`${row}, ${col}`);
@@ -30,7 +32,9 @@ export default class Chessboard {
       }
     } else {
       // no piece selected, so select one
+      console.log(this.selectedPiece);
       const piece = this.findPieceAt(row, col);
+      console.log(piece);
       if (piece) {
         this.selectedPiece = piece;
         this.selectedTile = { row, col };
