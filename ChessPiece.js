@@ -20,6 +20,10 @@ export default class chessPiece {
     }
   }
 
+  returnPossibleMoves() {
+    // Basic logic or overridden by derived classes
+  }
+
   isValidMove(targetPosition) {
     // Basic logic or overridden by derived classes
   }
@@ -32,6 +36,7 @@ export default class chessPiece {
     // Notify GameLogic about the capture
     // Add any other piece-specific logic if needed (e.g., special effects, sounds)
   }
+
   notifyListeners(event, data) {
     if (this.gameLogic) {
       this.gameLogic.notifyListeners(event, data);

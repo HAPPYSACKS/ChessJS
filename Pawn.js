@@ -12,7 +12,8 @@ export default class Pawn extends chessPiece {
     // maybe implement, depending on if needed, or using listeners to implement this.
   }
 
-  isValidMove(targetPosition) {
+  returnPossibleMoves() {
+    // Basic logic or overridden by derived classes
     let possibleMoves = [];
 
     if ((this, color === "white" && this.firstMove)) {
@@ -42,6 +43,11 @@ export default class Pawn extends chessPiece {
         col: this.position.col,
       });
     }
+  }
+
+  isValidMove(targetPosition) {
+    let possibleMoves = this.returnPossibleMoves();
+
     return possibleMoves.includes(targetPosition);
   }
 }
