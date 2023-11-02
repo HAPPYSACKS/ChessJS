@@ -20,6 +20,23 @@ export default class Chessboard {
 
   handleSquareClick(row, col) {
     console.log(`${row}, ${col}`);
+    // check if the piece is already selected
+    if (this.selectedPiece) {
+      if (this.selectedPiece.isValidMove({ row, col })) {
+        gameLogic.movePiece(this.selectedTile, { row, col });
+        // clear selection if showcasing them
+      } else {
+        // clear selection if the move isn't valid
+      }
+    } else {
+      // no piece selected, so select one
+      const piece = this.findPieceAt(row, col);
+      if (piece) {
+        this.selectedPiece = piece;
+        this.selectedTile = { row, col };
+        // highlight tiles
+      }
+    }
   }
 
   initializeBoard() {
