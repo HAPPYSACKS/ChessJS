@@ -1,4 +1,9 @@
+
+
 # GAME OVERVIEW
+
+## Run the application
+npx live-server  
 
 ## Title
 
