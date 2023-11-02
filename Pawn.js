@@ -17,30 +17,31 @@ export default class Pawn extends chessPiece {
 
     if ((this, color === "white" && this.firstMove)) {
       possibleMoves.push({
-        row: targetPosition.row - 2,
-        col: targetPosition.col,
+        row: this.position.row - 2,
+        col: this.position.col,
       });
     }
 
     if (this.color === "white") {
       possibleMoves.push({
-        row: targetPosition.row - 1,
-        col: targetPosition.col,
+        row: this.position.row - 1,
+        col: this.position.col,
       });
     }
 
     if ((this, color === "black" && this.firstMove)) {
       possibleMoves.push({
-        row: targetPosition.row + 2,
-        col: targetPosition.col,
+        row: this.position.row + 2,
+        col: this.position.col,
       });
     }
 
     if (this.color === "white") {
       possibleMoves.push({
-        row: targetPosition.row + 1,
-        col: targetPosition.col,
+        row: this.position.row + 1,
+        col: this.position.col,
       });
     }
+    return possibleMoves.includes(targetPosition);
   }
 }
