@@ -1,5 +1,8 @@
 // Handles gamerules, player turns, and checks for specific states like check, checkmate, or stalemate.
-export default class Gamelogic extends Observer {
+
+import ChessboardObserver from "./ChessboardObserver.js";
+
+export default class Gamelogic extends ChessboardObserver {
   currentPlayer;
   chessboard;
   timer;
@@ -9,22 +12,11 @@ export default class Gamelogic extends Observer {
   capturedBlackPieces = [];
 
   constructor(chessboard) {
+    super("Chess Game");
     this.chessboard = chessboard;
     this.currentPlayer = "white";
     this.whiteTimeRemaining = 600; // 10 minutes in seconds
     this.blackTimeRemaining = 600; // 10 minutes in seconds
-  }
-
-  registerListener(listener) {
-    this.listeners.push(listener);
-  }
-
-  notifyListeners(event, data) {
-    for (let listener of this.listeners) {
-      if (typeof listener[event] === "function") {
-        listener[event](data);
-      }
-    }
   }
 
   isCheck() {
@@ -149,7 +141,6 @@ export default class Gamelogic extends Observer {
     this.switchPlayer();
     // Start Timer for swapped player
     this.startTimer();
-    this.chessboard.renderBoard();
   }
 
   pieceCaptured(capturingPiece, capturedPiece) {
@@ -190,5 +181,10 @@ export default class Gamelogic extends Observer {
     pieceImg.src = capturedPiece.displayedImg;
     // Append created image to capture area.
     displayArea.appendChild(pieceImg);
+  }
+  update(currentPosition, newPosition) {
+    // console.log(`${this.name} received data:`, data);
+    this.movePiece(currentPosition, newPosition);
+    this.chessboard.renderBoard();
   }
 }

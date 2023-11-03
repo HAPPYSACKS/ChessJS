@@ -4,13 +4,15 @@ import King from "./King.js";
 import Pawn from "./Pawn.js";
 import Queen from "./Queen.js";
 import Rook from "./Rook.js";
+import ChessboardObservable from "./ChessboardObservable.js";
 
-export default class Chessboard extends Observable {
+export default class Chessboard extends ChessboardObservable {
   board;
   currentPlayer;
   selectedTile = null;
   selectedPiece = null;
   constructor() {
+    super();
     this.board = Array(8)
       .fill(null)
       .map(() => Array(8).fill(null));
@@ -25,7 +27,9 @@ export default class Chessboard extends Observable {
     // check if the piece is already selected
     if (this.selectedPiece) {
       if (this.selectedPiece.isValidMove({ row, col })) {
-        gameLogic.movePiece(this.selectedTile, { row, col });
+        // notify gamelogic to move the piece to the tile
+        this.notify(this.selectedTile, { row, col });
+
         // clear selection if showcasing them
       } else {
         // clear selection if the move isn't valid

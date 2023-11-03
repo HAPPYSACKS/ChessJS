@@ -1,4 +1,4 @@
-class Observable {
+export default class Observable {
   observers;
   constructor() {
     this.observers = [];
