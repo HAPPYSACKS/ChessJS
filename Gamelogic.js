@@ -5,6 +5,7 @@
 // Adjust pawn first move accordingly
 
 import ChessboardObserver from "./ChessboardObserver.js";
+import Knight from "./Knight.js";
 
 export default class Gamelogic extends ChessboardObserver {
   currentPlayer;
@@ -148,6 +149,15 @@ export default class Gamelogic extends ChessboardObserver {
       if (targetPiece && selectedChessPiece.color === targetPiece.color) {
         return; // Exit the function without making a move
       }
+
+      if (
+        !(selectedChessPiece instanceof Knight) &&
+        this.hasInterveningPieces(currentPosition, newPosition)
+      ) {
+        console.error("Cannot move through other pieces!");
+        return;
+      }
+
       console.log(
         `checking if piece is capturable? ${
           targetPiece &&
@@ -220,5 +230,26 @@ export default class Gamelogic extends ChessboardObserver {
     pieceImg.src = capturedPiece.displayedImg;
     // Append created image to capture area.
     displayArea.appendChild(pieceImg);
+  }
+  hasInterveningPieces(start, end) {
+    const direction = {
+      x: start.col < end.col ? 1 : start.col > end.col ? -1 : 0,
+      y: start.row < end.row ? 1 : start.row > end.row ? -1 : 0,
+    };
+
+    let currentPos = {
+      row: start.row + direction.y,
+      col: start.col + direction.x,
+    };
+
+    while (currentPos.row !== end.row || currentPos.col !== end.col) {
+      if (this.chessboard.board[currentPos.row][currentPos.col] !== null) {
+        return true; // There is a piece in the way
+      }
+      currentPos.row += direction.y;
+      currentPos.col += direction.x;
+    }
+
+    return false;
   }
 }
