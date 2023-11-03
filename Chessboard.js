@@ -23,23 +23,26 @@ export default class Chessboard extends ChessboardObservable {
   }
 
   handleSquareClick(row, col) {
-    console.log(`${row}, ${col}`);
     // check if the piece is already selected
     if (this.selectedPiece) {
+      console.log(
+        `Piece is already selected. Valid move? ${this.selectedPiece.isValidMove(
+          { row, col }
+        )} pos: ${row}, ${col}`
+      );
       if (this.selectedPiece.isValidMove({ row, col })) {
         // notify gamelogic to move the piece to the tile
-        console.log("notifying listeners...");
         this.notify(this.selectedTile, { row, col });
 
         // clear selection if showcasing them
-      } else {
-        // clear selection if the move isn't valid
       }
+      this.selectedPiece = null;
+      this.selectedTile = null;
     } else {
       // no piece selected, so select one
-      console.log(this.selectedPiece);
+
       const piece = this.findPieceAt(row, col);
-      console.log(piece);
+
       if (piece) {
         this.selectedPiece = piece;
         this.selectedTile = { row, col };
@@ -82,6 +85,11 @@ export default class Chessboard extends ChessboardObservable {
 
   renderBoard() {
     let boardHTML = document.getElementById("chessboard");
+
+    // clear existing HTML
+
+    boardHTML.innerHTML = "";
+
     for (let row = 0; row < 8; row++) {
       for (let col = 0; col < 8; col++) {
         let square = document.createElement("div");

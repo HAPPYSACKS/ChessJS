@@ -19,6 +19,13 @@ export default class Gamelogic extends ChessboardObserver {
     this.blackTimeRemaining = 600; // 10 minutes in seconds
   }
 
+  update(currentPosition, newPosition) {
+    console.log(currentPosition);
+    console.log(newPosition);
+    this.movePiece(currentPosition, newPosition);
+    this.chessboard.renderBoard();
+  }
+
   isCheck() {
     // Identify the position of the king for the current player.
     // For every piece of the opposing player, check if they can move to the king's position.
@@ -113,12 +120,20 @@ export default class Gamelogic extends ChessboardObserver {
 
   movePiece(currentPosition, newPosition) {
     // get chess piece at 'current position'
-    selectedChessPiece = findPieceAt(currentPosition.row, currentPosition.col);
+
+    const selectedChessPiece = this.chessboard.findPieceAt(
+      currentPosition.row,
+      currentPosition.col
+    );
+
     // Check if the move to 'new position' is valid
-    if (selectedChessPiece.isValidMove(newPosition)) {
+    if (selectedChessPiece && selectedChessPiece.isValidMove(newPosition)) {
       // Then check if there's a piece on the target square
       // if there's a piece at the target square and it's the opposing color, then capture it
-      let targetPiece = this.chessboard.findPieceAt(newPosition);
+      let targetPiece = this.chessboard.findPieceAt(
+        newPosition.row,
+        newPosition.col
+      );
 
       if (
         targetPiece &&
@@ -131,8 +146,9 @@ export default class Gamelogic extends ChessboardObserver {
       selectedChessPiece.position.row = newPosition.row;
       selectedChessPiece.position.col = newPosition.col;
       // Be careful of this, ensure it actually copies the currentPosition to newPosition and deletes the currentPosition after.
-      this.chessboard[newPosition.row][newPosition.col] = selectedChessPiece;
-      this.chessboard[currentPosition.row][currentPosition.col] = null;
+      this.chessboard.board[newPosition.row][newPosition.col] =
+        selectedChessPiece;
+      this.chessboard.board[currentPosition.row][currentPosition.col] = null;
     }
 
     // Stop Timer for player
@@ -181,10 +197,5 @@ export default class Gamelogic extends ChessboardObserver {
     pieceImg.src = capturedPiece.displayedImg;
     // Append created image to capture area.
     displayArea.appendChild(pieceImg);
-  }
-  update(currentPosition, newPosition) {
-    console.log(`${this.name} received data:`, data);
-    this.movePiece(currentPosition, newPosition);
-    this.chessboard.renderBoard();
   }
 }
