@@ -131,6 +131,11 @@ export default class Gamelogic extends ChessboardObserver {
       currentPosition.col
     );
 
+    if (selectedChessPiece.color !== this.currentPlayer) {
+      console.error("It's not your turn!");
+      return;
+    }
+
     // Check if the move to 'new position' is valid
     if (selectedChessPiece && selectedChessPiece.isValidMove(newPosition)) {
       // Then check if there's a piece on the target square
