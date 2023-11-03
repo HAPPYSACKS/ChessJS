@@ -126,11 +126,6 @@ export default class Gamelogic extends ChessboardObserver {
       currentPosition.col
     );
 
-    // Check if the target square is occupied by an ally
-    if (targetPiece && selectedChessPiece.color === targetPiece.color) {
-      return; // Exit the function without making a move
-    }
-
     // Check if the move to 'new position' is valid
     if (selectedChessPiece && selectedChessPiece.isValidMove(newPosition)) {
       // Then check if there's a piece on the target square
@@ -139,6 +134,11 @@ export default class Gamelogic extends ChessboardObserver {
         newPosition.row,
         newPosition.col
       );
+
+      // Check if the target square is occupied by an ally
+      if (targetPiece && selectedChessPiece.color === targetPiece.color) {
+        return; // Exit the function without making a move
+      }
 
       if (
         targetPiece &&
