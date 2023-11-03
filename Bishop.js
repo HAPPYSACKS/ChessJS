@@ -7,4 +7,26 @@ export default class Bishop extends chessPiece {
     super(color, position);
     this.setDisplayedImage();
   }
+  returnPossibleMoves() {
+    let possibleMoves = [];
+    const directions = [
+      { row: -1, col: -1 }, // Up-left
+      { row: -1, col: 1 }, // Up-right
+      { row: 1, col: -1 }, // Down-left
+      { row: 1, col: 1 }, // Down-right
+    ];
+
+    for (let direction of directions) {
+      let newRow = this.position.row + direction.row;
+      let newCol = this.position.col + direction.col;
+
+      while (this.isInBounds(newRow, newCol)) {
+        possibleMoves.push({ row: newRow, col: newCol });
+        newRow += direction.row;
+        newCol += direction.col;
+      }
+    }
+
+    return possibleMoves;
+  }
 }
