@@ -3,7 +3,6 @@
 // TODO
 // Ensure pieces can't travel past each other (except knight)
 // Adjust pawn first move accordingly
-// Ensure only black, white, on their turns, can click
 
 import ChessboardObserver from "./ChessboardObserver.js";
 
@@ -149,7 +148,13 @@ export default class Gamelogic extends ChessboardObserver {
       if (targetPiece && selectedChessPiece.color === targetPiece.color) {
         return; // Exit the function without making a move
       }
-
+      console.log(
+        `checking if piece is capturable? ${
+          targetPiece &&
+          selectedChessPiece.color !== targetPiece.color &&
+          selectedChessPiece.canCapture(newPosition)
+        }`
+      );
       if (
         targetPiece &&
         selectedChessPiece.color !== targetPiece.color &&
@@ -176,6 +181,9 @@ export default class Gamelogic extends ChessboardObserver {
 
   pieceCaptured(capturingPiece, capturedPiece) {
     // Remove the captured piece from the board
+    console.log(
+      `Capruting Piece at ${capturedPiece.position.row}, ${capturedPiece.position.col}`
+    );
     chessboard[capturedPiece.position.row][capturedPiece.position.col] = null;
     // Add the captured piece to a captured pieces area
     this.addCapturedPieceToDisplay(capturedPiece);
