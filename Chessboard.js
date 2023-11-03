@@ -28,6 +28,7 @@ export default class Chessboard extends ChessboardObservable {
     if (this.selectedPiece) {
       if (this.selectedPiece.isValidMove({ row, col })) {
         // notify gamelogic to move the piece to the tile
+        console.log("notifying listeners...");
         this.notify(this.selectedTile, { row, col });
 
         // clear selection if showcasing them

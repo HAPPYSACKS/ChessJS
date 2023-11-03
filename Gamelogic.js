@@ -183,7 +183,7 @@ export default class Gamelogic extends ChessboardObserver {
     displayArea.appendChild(pieceImg);
   }
   update(currentPosition, newPosition) {
-    // console.log(`${this.name} received data:`, data);
+    console.log(`${this.name} received data:`, data);
     this.movePiece(currentPosition, newPosition);
     this.chessboard.renderBoard();
   }
