@@ -1,5 +1,10 @@
 // Handles gamerules, player turns, and checks for specific states like check, checkmate, or stalemate.
 
+// TODO
+// Ensure pieces can't travel past each other (except knight)
+// Adjust pawn first move accordingly
+// Ensure only black, white, on their turns, can click
+
 import ChessboardObserver from "./ChessboardObserver.js";
 
 export default class Gamelogic extends ChessboardObserver {
