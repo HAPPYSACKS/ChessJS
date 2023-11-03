@@ -5,10 +5,33 @@ export default class King extends chessPiece {
   whiteImage = "./img/white_king.svg";
   blackImage = "./img/black_king.svg";
   constructor(color, position) {
-    super(color, position); 
-    this.setDisplayedImage(); 
+    super(color, position);
+    this.setDisplayedImage();
   }
-  canCapture() {
-    
+  canCapture() {}
+
+  returnPossibleMoves() {
+    let possibleMoves = [];
+    const directions = [
+      { row: -1, col: -1 }, // Up-left
+      { row: -1, col: 0 }, // Up
+      { row: -1, col: 1 }, // Up-right
+      { row: 0, col: -1 }, // Left
+      { row: 0, col: 1 }, // Right
+      { row: 1, col: -1 }, // Down-left
+      { row: 1, col: 0 }, // Down
+      { row: 1, col: 1 }, // Down-right
+    ];
+
+    for (let direction of directions) {
+      const newRow = this.position.row + direction.row;
+      const newCol = this.position.col + direction.col;
+
+      if (this.isInBounds(newRow, newCol)) {
+        possibleMoves.push({ row: newRow, col: newCol });
+      }
+    }
+
+    return possibleMoves;
   }
 }

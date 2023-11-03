@@ -37,6 +37,19 @@ export default class chessPiece {
     // Add any other piece-specific logic if needed (e.g., special effects, sounds)
   }
 
+  isValidMove(targetPosition) {
+    let possibleMoves = this.returnPossibleMoves();
+
+    return possibleMoves.some(
+      (move) =>
+        move.row === targetPosition.row && move.col === targetPosition.col
+    );
+  }
+
+  isInBounds(row, col) {
+    return row >= 0 && row < 8 && col >= 0 && col < 8;
+  }
+
   notifyListeners(event, data) {
     if (this.gameLogic) {
       this.gameLogic.notifyListeners(event, data);

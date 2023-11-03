@@ -45,15 +45,4 @@ export default class Pawn extends chessPiece {
     }
     return possibleMoves;
   }
-
-  isValidMove(targetPosition) {
-    let possibleMoves = this.returnPossibleMoves();
-
-    console.log(possibleMoves);
-
-    return possibleMoves.some(
-      (move) =>
-        move.row === targetPosition.row && move.col === targetPosition.col
-    );
-  }
 }
