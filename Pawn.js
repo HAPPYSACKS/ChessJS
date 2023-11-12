@@ -31,36 +31,43 @@ export default class Pawn extends chessPiece {
   }
 
   returnPossibleMoves() {
-    // Basic logic or overridden by derived classes
     let possibleMoves = [];
 
-    if (this.color === "white" && this.firstMove) {
-      possibleMoves.push({
-        row: this.position.row + 2,
-        col: this.position.col,
-      });
+    const direction = this.color === "white" ? +1 : -1;
+    const forwardMove = {
+      row: this.position.row + direction,
+      col: this.position.col,
+    };
+
+    // Add standard forward moves
+    if (this.isInBounds(forwardMove.row, forwardMove.col)) {
+      possibleMoves.push(forwardMove);
+
+      if (this.firstMove) {
+        const doubleMove = {
+          row: this.position.row + 2 * direction,
+          col: this.position.col,
+        };
+        if (this.isInBounds(doubleMove.row, doubleMove.col)) {
+          possibleMoves.push(doubleMove);
+        }
+      }
     }
 
-    if (this.color === "white") {
-      possibleMoves.push({
-        row: this.position.row + 1,
-        col: this.position.col,
-      });
-    }
+    // Add diagonal capture moves
+    const captureMoves = [
+      { row: this.position.row + direction, col: this.position.col - 1 },
+      { row: this.position.row + direction, col: this.position.col + 1 },
+    ];
 
-    if (this.color === "black" && this.firstMove) {
-      possibleMoves.push({
-        row: this.position.row - 2,
-        col: this.position.col,
-      });
-    }
+    captureMoves.forEach((move) => {
+      if (this.isInBounds(move.row, move.col)) {
+        possibleMoves.push(move);
+      }
+    });
 
-    if (this.color === "black") {
-      possibleMoves.push({
-        row: this.position.row - 1,
-        col: this.position.col,
-      });
-    }
+    console.log(possibleMoves);
+
     return possibleMoves;
   }
 }

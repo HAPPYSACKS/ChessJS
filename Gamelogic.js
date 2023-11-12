@@ -43,6 +43,14 @@ export default class Gamelogic extends ChessboardObserver {
 
     // Special handling for pawn captures
     if (selectedChessPiece instanceof Pawn) {
+      console.log(
+        this.isValidPawnMove(
+          selectedChessPiece,
+          targetPiece,
+          currentPosition,
+          newPosition
+        )
+      );
       return this.isValidPawnMove(
         selectedChessPiece,
         targetPiece,
@@ -68,27 +76,17 @@ export default class Gamelogic extends ChessboardObserver {
   }
 
   isValidPawnMove(pawn, targetPiece, currentPosition, newPosition) {
-    const moveDirection = pawn.color === "white" ? -1 : 1;
+    // Determine if the move is a forward move or a capture
     const isForwardMove = newPosition.col === currentPosition.col;
-    const isDiagonalCapture =
-      Math.abs(newPosition.col - currentPosition.col) === 1 &&
-      newPosition.row === currentPosition.row + moveDirection;
+    const isCaptureMove = !isForwardMove && targetPiece;
 
-    if (isForwardMove) {
-      // Check for blockage in forward move
-      if (targetPiece) {
-        console.error("Pawns cannot move forward into occupied squares!");
-        return false;
-      }
-    } else if (isDiagonalCapture) {
-      // Check for valid capture
-      if (!targetPiece || targetPiece.color === pawn.color) {
-        console.error("Invalid capture: No enemy piece to capture!");
-        return false;
-      }
-    } else {
-      // Invalid move for pawn
-      console.error("Invalid pawn move!");
+    if (isForwardMove && targetPiece) {
+      console.error("Pawns cannot move forward into occupied squares!");
+      return false;
+    }
+
+    if (isCaptureMove && (!targetPiece || targetPiece.color === pawn.color)) {
+      console.error("Invalid pawn capture!");
       return false;
     }
 
@@ -108,6 +106,7 @@ export default class Gamelogic extends ChessboardObserver {
 
   executeMove(selectedChessPiece, targetPiece, newPosition) {
     if (this.canCapturePiece(selectedChessPiece, targetPiece, newPosition)) {
+      console.log(selectedChessPiece);
       this.pieceCaptured(selectedChessPiece, targetPiece);
     }
 
@@ -260,9 +259,11 @@ export default class Gamelogic extends ChessboardObserver {
   pieceCaptured(capturingPiece, capturedPiece) {
     // Remove the captured piece from the board
     console.log(
-      `Capruting Piece at ${capturedPiece.position.row}, ${capturedPiece.position.col}`
+      `Capturing Piece at ${capturedPiece.position.row}, ${capturedPiece.position.col}`
     );
-    chessboard[capturedPiece.position.row][capturedPiece.position.col] = null;
+    this.chessboard.board[capturedPiece.position.row][
+      capturedPiece.position.col
+    ] = null;
     // Add the captured piece to a captured pieces area
     this.addCapturedPieceToDisplay(capturedPiece);
     // Handle any other game consequences of the capture
