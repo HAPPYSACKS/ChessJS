@@ -12,7 +12,23 @@ export default class Pawn extends chessPiece {
     // maybe implement, depending on if needed, or using listeners to implement this.
   }
 
-  canCapture() {}
+  canCapture() {
+    const captureMoves = [];
+
+    const direction = this.color === "white" ? -1 : 1; // White moves up (-1), Black moves down (+1)
+
+    // Capture moves are always one row ahead and one column to the left/right
+    captureMoves.push({
+      row: this.position.row + direction,
+      col: this.position.col - 1,
+    });
+    captureMoves.push({
+      row: this.position.row + direction,
+      col: this.position.col + 1,
+    });
+
+    return captureMoves;
+  }
 
   returnPossibleMoves() {
     // Basic logic or overridden by derived classes

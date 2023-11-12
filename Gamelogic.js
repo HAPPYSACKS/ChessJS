@@ -6,6 +6,7 @@
 
 import ChessboardObserver from "./ChessboardObserver.js";
 import Knight from "./Knight.js";
+import Pawn from "./Pawn.js";
 
 export default class Gamelogic extends ChessboardObserver {
   currentPlayer;
@@ -40,15 +41,54 @@ export default class Gamelogic extends ChessboardObserver {
       return false;
     }
 
+    // Special handling for pawn captures
+    if (selectedChessPiece instanceof Pawn) {
+      return this.isValidPawnMove(
+        selectedChessPiece,
+        targetPiece,
+        currentPosition,
+        newPosition
+      );
+    }
+
     if (this.isAllyPiece(targetPiece, selectedChessPiece)) {
       console.error("Cannot capture your own piece!");
       return false;
     }
 
     if (
-      this.isInvalidKnightMove(selectedChessPiece, currentPosition, newPosition)
+      !(selectedChessPiece instanceof Knight) &&
+      this.hasInterveningPieces(currentPosition, newPosition)
     ) {
       console.error("Cannot move through other pieces!");
+      return false;
+    }
+
+    return true;
+  }
+
+  isValidPawnMove(pawn, targetPiece, currentPosition, newPosition) {
+    const moveDirection = pawn.color === "white" ? -1 : 1;
+    const isForwardMove = newPosition.col === currentPosition.col;
+    const isDiagonalCapture =
+      Math.abs(newPosition.col - currentPosition.col) === 1 &&
+      newPosition.row === currentPosition.row + moveDirection;
+
+    if (isForwardMove) {
+      // Check for blockage in forward move
+      if (targetPiece) {
+        console.error("Pawns cannot move forward into occupied squares!");
+        return false;
+      }
+    } else if (isDiagonalCapture) {
+      // Check for valid capture
+      if (!targetPiece || targetPiece.color === pawn.color) {
+        console.error("Invalid capture: No enemy piece to capture!");
+        return false;
+      }
+    } else {
+      // Invalid move for pawn
+      console.error("Invalid pawn move!");
       return false;
     }
 
