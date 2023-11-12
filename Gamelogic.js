@@ -31,6 +31,71 @@ export default class Gamelogic extends ChessboardObserver {
     this.chessboard.renderBoard();
   }
 
+  isPlayerTurn(chessPiece) {
+    return chessPiece && chessPiece.color === this.currentPlayer;
+  }
+
+  isValidMove(selectedChessPiece, targetPiece, currentPosition, newPosition) {
+    if (!selectedChessPiece.isValidMove(newPosition)) {
+      return false;
+    }
+
+    if (this.isAllyPiece(targetPiece, selectedChessPiece)) {
+      console.error("Cannot capture your own piece!");
+      return false;
+    }
+
+    if (
+      this.isInvalidKnightMove(selectedChessPiece, currentPosition, newPosition)
+    ) {
+      console.error("Cannot move through other pieces!");
+      return false;
+    }
+
+    return true;
+  }
+
+  isAllyPiece(targetPiece, selectedChessPiece) {
+    return targetPiece && selectedChessPiece.color === targetPiece.color;
+  }
+
+  isInvalidKnightMove(selectedChessPiece, currentPosition, newPosition) {
+    return (
+      !(selectedChessPiece instanceof Knight) &&
+      this.hasInterveningPieces(currentPosition, newPosition)
+    );
+  }
+
+  executeMove(selectedChessPiece, targetPiece, newPosition) {
+    if (this.canCapturePiece(selectedChessPiece, targetPiece, newPosition)) {
+      this.pieceCaptured(selectedChessPiece, targetPiece);
+    }
+
+    this.updatePiecePosition(selectedChessPiece, newPosition);
+  }
+
+  canCapturePiece(selectedChessPiece, targetPiece, newPosition) {
+    return (
+      targetPiece &&
+      selectedChessPiece.color !== targetPiece.color &&
+      selectedChessPiece.canCapture(newPosition)
+    );
+  }
+
+  updatePiecePosition(chessPiece, newPosition) {
+    this.chessboard.board[chessPiece.position.row][chessPiece.position.col] =
+      null;
+    chessPiece.position = { ...newPosition };
+    this.chessboard.board[newPosition.row][newPosition.col] = chessPiece;
+  }
+
+  finalizeMove() {
+    this.stopTimer();
+    this.switchPlayer();
+    this.startTimer();
+    this.chessboard.renderBoard();
+  }
+
   isCheck() {
     // Identify the position of the king for the current player.
     // For every piece of the opposing player, check if they can move to the king's position.
@@ -122,73 +187,36 @@ export default class Gamelogic extends ChessboardObserver {
       clearInterval(this.timer);
     }
   }
-
   movePiece(currentPosition, newPosition) {
-    // get chess piece at 'current position'
-
     const selectedChessPiece = this.chessboard.findPieceAt(
       currentPosition.row,
       currentPosition.col
     );
 
-    if (selectedChessPiece.color !== this.currentPlayer) {
+    if (!this.isPlayerTurn(selectedChessPiece)) {
       console.error("It's not your turn!");
       return;
     }
 
-    // Check if the move to 'new position' is valid
-    if (selectedChessPiece && selectedChessPiece.isValidMove(newPosition)) {
-      // Then check if there's a piece on the target square
-      // if there's a piece at the target square and it's the opposing color, then capture it
-      let targetPiece = this.chessboard.findPieceAt(
-        newPosition.row,
-        newPosition.col
-      );
+    const targetPiece = this.chessboard.findPieceAt(
+      newPosition.row,
+      newPosition.col
+    );
 
-      // Check if the target square is occupied by an ally
-      if (targetPiece && selectedChessPiece.color === targetPiece.color) {
-        return; // Exit the function without making a move
-      }
-
-      if (
-        !(selectedChessPiece instanceof Knight) &&
-        this.hasInterveningPieces(currentPosition, newPosition)
-      ) {
-        console.error("Cannot move through other pieces!");
-        return;
-      }
-
-      console.log(
-        `checking if piece is capturable? ${
-          targetPiece &&
-          selectedChessPiece.color !== targetPiece.color &&
-          selectedChessPiece.canCapture(newPosition)
-        }`
-      );
-      if (
-        targetPiece &&
-        selectedChessPiece.color !== targetPiece.color &&
-        selectedChessPiece.canCapture(newPosition)
-      ) {
-        this.pieceCaptured(selectedChessPiece, targetPiece);
-      }
-      // Update the position of the moving piece to the new position
-      selectedChessPiece.position.row = newPosition.row;
-      selectedChessPiece.position.col = newPosition.col;
-      // Be careful of this, ensure it actually copies the currentPosition to newPosition and deletes the currentPosition after.
-      this.chessboard.board[newPosition.row][newPosition.col] =
-        selectedChessPiece;
-      this.chessboard.board[currentPosition.row][currentPosition.col] = null;
+    if (
+      !this.isValidMove(
+        selectedChessPiece,
+        targetPiece,
+        currentPosition,
+        newPosition
+      )
+    ) {
+      return; // Error messages are handled within isValidMove
     }
 
-    // Stop Timer for player
-    this.stopTimer();
-    // Switch player after a move or capture
-    this.switchPlayer();
-    // Start Timer for swapped player
-    this.startTimer();
+    this.executeMove(selectedChessPiece, targetPiece, newPosition);
+    this.finalizeMove();
   }
-
   pieceCaptured(capturingPiece, capturedPiece) {
     // Remove the captured piece from the board
     console.log(

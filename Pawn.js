@@ -12,6 +12,8 @@ export default class Pawn extends chessPiece {
     // maybe implement, depending on if needed, or using listeners to implement this.
   }
 
+  canCapture() {}
+
   returnPossibleMoves() {
     // Basic logic or overridden by derived classes
     let possibleMoves = [];
