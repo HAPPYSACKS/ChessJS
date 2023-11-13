@@ -198,17 +198,32 @@ export default class Gamelogic extends ChessboardObserver {
   }
 
   endGame(reason) {
-    // Stop the game and declare the winner
+    // Determine the winner
     let winner = this.currentPlayer === "white" ? "black" : "white";
-    console.log(`Game over! Reason: ${reason}. Winner: ${winner}`);
+    console.log("YOu win!");
 
-    // Display the ending screen/UI message
-    // You can modify the DOM, display a modal, or navigate to another screen as needed
-    let endingScreenElement = document.getElementById("ending-screen"); // Make sure to have this element in your HTML
-    // endingScreenElement.style.display = "block"; // Show the ending screen
-    endingScreenElement.innerHTML = `Checkmate! ${
+    // Set the victory message
+    let victoryMessage = `Checkmate! ${
       winner.charAt(0).toUpperCase() + winner.slice(1)
     } wins!`;
+    document.getElementById("victory-message").textContent = victoryMessage;
+
+    // Show the modal
+    let endingScreenModal = document.getElementById("ending-screen");
+    endingScreenModal.style.display = "block";
+
+    // Optional: Add an event listener to the close button
+    let closeButton = document.querySelector(".close");
+    closeButton.onclick = function () {
+      endingScreenModal.style.display = "none";
+    };
+
+    // Optional: Close the modal if the user clicks anywhere outside of it
+    window.onclick = function (event) {
+      if (event.target === endingScreenModal) {
+        endingScreenModal.style.display = "none";
+      }
+    };
     this.stopTimer();
   }
 
