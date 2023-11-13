@@ -170,38 +170,6 @@ export default class Gamelogic extends ChessboardObserver {
     return null;
   }
 
-  isCheckMate() {
-    if (!this.isCheck()) {
-      return false;
-    }
-
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const piece = this.chessboard.findPieceAt(row, col);
-        if (piece && piece.color === this.currentPlayer) {
-          const legalMoves = piece.returnPossibleMoves();
-          for (const move of legalMoves) {
-            console.log("Checking state...");
-            console.log(this.chessboard.board);
-            if (this.isMoveSafe(piece, move)) {
-              return false; // There is a legal move that removes the check.
-            }
-            console.log(this.chessboard.board);
-          }
-        }
-      }
-    }
-    return true; // No legal moves to remove the check, so it's checkmate.
-  }
-
-  isMoveSafe(piece, newPosition) {
-    const originalPosition = { ...piece.position };
-    this.updatePiecePosition(piece, newPosition);
-    const isSafe = !this.isCheck();
-    this.updatePiecePosition(piece, originalPosition);
-    return isSafe;
-  }
-
   isStaleMate() {
     // Ensure the current player's king is not in check. If the king is in check, it's not a stalemate.
     // Loop through all the pieces of the current player.
@@ -387,10 +355,31 @@ export default class Gamelogic extends ChessboardObserver {
   }
 
   simulateMove(piece, newPosition) {
+    // Save the original state
     const originalPosition = { ...piece.position };
+    const targetPiece = this.chessboard.findPieceAt(
+      newPosition.row,
+      newPosition.col
+    );
+
+    // Simulate the move
     this.updatePiecePosition(piece, newPosition);
-    const isInCheck = this.isCheck();
+    let captured;
+    if (targetPiece) {
+      captured = { ...targetPiece.position };
+      this.chessboard.board[captured.row][captured.col] = null; // Remove the captured piece from the board
+    }
+
+    // Check if the move results in check
+    const isInCheckAfterMove = this.isCheck();
+
+    // Revert the board to the original state
     this.updatePiecePosition(piece, originalPosition);
-    return isInCheck;
+    if (captured) {
+      this.chessboard.board[captured.row][captured.col] = targetPiece; // Put the captured piece back
+    }
+
+    // Return whether the move is safe (i.e., not resulting in check)
+    return !isInCheckAfterMove;
   }
 }
