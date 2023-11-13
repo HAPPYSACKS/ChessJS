@@ -150,6 +150,11 @@ body {
   margin-top: 20px;
 }
 
+.highlighted {
+  box-shadow: 0 0 10px 3px #ffeb3b; /* a yellow glow */
+  z-index: 1;
+}
+
 /* Alternate color for square spaces */
 
 #chessboard .square:nth-child(odd):nth-child(-n + 9) {

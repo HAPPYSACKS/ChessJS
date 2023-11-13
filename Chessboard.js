@@ -23,6 +23,20 @@ export default class Chessboard extends ChessboardObservable {
   }
 
   handleSquareClick(row, col) {
+    const clickedTile = document.getElementById(
+      `${String.fromCharCode(97 + col)}${8 - row}`
+    );
+    if (
+      this.selectedTile &&
+      this.selectedTile.row === row &&
+      this.selectedTile.col === col
+    ) {
+      clickedTile.classList.toggle("highlighted");
+      this.selectedPiece = null;
+      this.selectedTile = null;
+      return; // Return early to avoid further processing
+    }
+
     // check if the piece is already selected
     if (this.selectedPiece) {
       console.log(
@@ -35,6 +49,14 @@ export default class Chessboard extends ChessboardObservable {
         this.notify(this.selectedTile, { row, col });
 
         // clear selection if showcasing them
+        if (this.selectedTile) {
+          const prevSelectedTile = document.getElementById(
+            `${String.fromCharCode(97 + this.selectedTile.col)}${
+              8 - this.selectedTile.row
+            }`
+          );
+          prevSelectedTile.classList.remove("highlighted");
+        }
       }
       this.selectedPiece = null;
       this.selectedTile = null;
@@ -46,7 +68,9 @@ export default class Chessboard extends ChessboardObservable {
       if (piece) {
         this.selectedPiece = piece;
         this.selectedTile = { row, col };
+
         // highlight tiles
+        clickedTile.classList.add("highlighted");
       }
     }
   }
