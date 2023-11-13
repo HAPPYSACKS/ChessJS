@@ -7,6 +7,7 @@
 import ChessboardObserver from "./ChessboardObserver.js";
 import Knight from "./Knight.js";
 import Pawn from "./Pawn.js";
+import King from "./King.js";
 
 export default class Gamelogic extends ChessboardObserver {
   currentPlayer;
@@ -43,14 +44,6 @@ export default class Gamelogic extends ChessboardObserver {
 
     // Special handling for pawn captures
     if (selectedChessPiece instanceof Pawn) {
-      console.log(
-        this.isValidPawnMove(
-          selectedChessPiece,
-          targetPiece,
-          currentPosition,
-          newPosition
-        )
-      );
       return this.isValidPawnMove(
         selectedChessPiece,
         targetPiece,
@@ -136,9 +129,34 @@ export default class Gamelogic extends ChessboardObserver {
   }
 
   isCheck() {
-    // Identify the position of the king for the current player.
-    // For every piece of the opposing player, check if they can move to the king's position.
-    // If any opposing piece can legally move to the king's position, the king is in "check".
+    const kingPosition = this.findKing(this.currentPlayer);
+    const opponentColor = this.currentPlayer === "white" ? "black" : "white";
+
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = this.chessboard.findPieceAt(row, col);
+        if (
+          piece &&
+          piece.color === opponentColor &&
+          piece.isValidMove(kingPosition)
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  findKing(playerColor) {
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = this.chessboard.findPieceAt(row, col);
+        if (piece instanceof King && piece.color === playerColor) {
+          return { row, col };
+        }
+      }
+    }
+    return null;
   }
 
   isCheckMate() {
@@ -255,6 +273,7 @@ export default class Gamelogic extends ChessboardObserver {
 
     this.executeMove(selectedChessPiece, targetPiece, newPosition);
     this.finalizeMove();
+    console.log(this.isCheck());
   }
   pieceCaptured(capturingPiece, capturedPiece) {
     // Remove the captured piece from the board
