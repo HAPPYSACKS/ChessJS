@@ -373,15 +373,17 @@ export default class Gamelogic extends ChessboardObserver {
     // id "captured-white" or "captured-black"
     let displayArea;
     if (capturedPiece.color === "white") {
-      displayArea = document.getElementById("captured-white");
-    } else {
       displayArea = document.getElementById("captured-black");
+    } else {
+      displayArea = document.getElementById("captured-white");
     }
 
     // Create an img element for captured element
     let pieceImg = document.createElement("img");
     // Set the src attribute to the capturedPiece.displayedImage
-    pieceImg.src = capturedPiece.displayedImg;
+    pieceImg.src = capturedPiece.displayedImage;
+    console.log(capturedPiece);
+    console.log(capturedPiece.displayedImage);
     // Append created image to capture area.
     displayArea.appendChild(pieceImg);
   }

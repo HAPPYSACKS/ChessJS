@@ -59,6 +59,11 @@ body {
   align-items: flex-start;
 }
 
+.captured-pieces > img {
+  width: 50%;
+  height: auto;
+}
+
 #player-top {
   padding-bottom: 2vh;
   display: flex;

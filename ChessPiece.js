@@ -5,10 +5,10 @@ export default class chessPiece {
   blackImage;
   displayedImage;
 
-  constructor(color, position, gameLogic) {
+  constructor(color, position) {
     this.color = color;
     this.position = position;
-    this.gameLogic = gameLogic;
+
     this.setDisplayedImage();
   }
 
@@ -51,16 +51,9 @@ export default class chessPiece {
       (move) =>
         move.row === targetPosition.row && move.col === targetPosition.col
     );
-
   }
 
   isInBounds(row, col) {
     return row >= 0 && row < 8 && col >= 0 && col < 8;
-  }
-
-  notifyListeners(event, data) {
-    if (this.gameLogic) {
-      this.gameLogic.notifyListeners(event, data);
-    }
   }
 }
