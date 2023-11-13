@@ -8,6 +8,7 @@ import ChessboardObserver from "./ChessboardObserver.js";
 import Knight from "./Knight.js";
 import Pawn from "./Pawn.js";
 import King from "./King.js";
+import MoveValidator from "./MoveValidator.js";
 
 export default class Gamelogic extends ChessboardObserver {
   currentPlayer;
@@ -190,11 +191,27 @@ export default class Gamelogic extends ChessboardObserver {
   }
 
   finalizeMove() {
+    this.chessboard.renderBoard();
     this.stopTimer();
     this.switchPlayer();
     this.startTimer();
-    this.chessboard.renderBoard();
   }
+
+  endGame(reason) {
+    // Stop the game and declare the winner
+    let winner = this.currentPlayer === "white" ? "black" : "white";
+    console.log(`Game over! Reason: ${reason}. Winner: ${winner}`);
+
+    // Display the ending screen/UI message
+    // You can modify the DOM, display a modal, or navigate to another screen as needed
+    let endingScreenElement = document.getElementById("ending-screen"); // Make sure to have this element in your HTML
+    // endingScreenElement.style.display = "block"; // Show the ending screen
+    endingScreenElement.innerHTML = `Checkmate! ${
+      winner.charAt(0).toUpperCase() + winner.slice(1)
+    } wins!`;
+    this.stopTimer();
+  }
+
   isCheck() {
     const kingPosition = this.findKing(this.currentPlayer);
     const opponentColor = this.currentPlayer === "white" ? "black" : "white";
@@ -419,6 +436,10 @@ export default class Gamelogic extends ChessboardObserver {
     this.finalizeMove();
 
     console.log(this.isCheck());
+    if (this.isCheckMate()) {
+      this.endGame("checkmate");
+      return; // Exit the method to avoid further game processing
+    }
     console.log(this.isCheckMate());
   }
 
