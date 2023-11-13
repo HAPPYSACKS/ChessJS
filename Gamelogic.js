@@ -171,17 +171,35 @@ export default class Gamelogic extends ChessboardObserver {
   }
 
   isCheckMate() {
-    // Start by determining if the king is in "check" using the method above.
-    // If the king is in check, then:
-    // Determine all the legal moves for the king.
-    // For each legal move:
-    // Simulate that move.
-    // Check if the king is still in "check" in that simulated position.
-    // If the king is in check in every simulated position, move on to step 3.
-    // For every piece of the current player:
-    // Simulate all their legal moves.
-    // After each simulated move, check if the king is still in "check".
-    // If no piece can make a move that removes the "check" on the king, it's "checkmate".
+    if (!this.isCheck()) {
+      return false;
+    }
+
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = this.chessboard.findPieceAt(row, col);
+        if (piece && piece.color === this.currentPlayer) {
+          const legalMoves = piece.returnPossibleMoves();
+          for (const move of legalMoves) {
+            console.log("Checking state...");
+            console.log(this.chessboard.board);
+            if (this.isMoveSafe(piece, move)) {
+              return false; // There is a legal move that removes the check.
+            }
+            console.log(this.chessboard.board);
+          }
+        }
+      }
+    }
+    return true; // No legal moves to remove the check, so it's checkmate.
+  }
+
+  isMoveSafe(piece, newPosition) {
+    const originalPosition = { ...piece.position };
+    this.updatePiecePosition(piece, newPosition);
+    const isSafe = !this.isCheck();
+    this.updatePiecePosition(piece, originalPosition);
+    return isSafe;
   }
 
   isStaleMate() {
@@ -254,37 +272,6 @@ export default class Gamelogic extends ChessboardObserver {
     if (this.timer) {
       clearInterval(this.timer);
     }
-  }
-  movePiece(currentPosition, newPosition) {
-    const selectedChessPiece = this.chessboard.findPieceAt(
-      currentPosition.row,
-      currentPosition.col
-    );
-
-    if (!this.isPlayerTurn(selectedChessPiece)) {
-      console.error("It's not your turn!");
-      return;
-    }
-
-    const targetPiece = this.chessboard.findPieceAt(
-      newPosition.row,
-      newPosition.col
-    );
-
-    if (
-      !this.isValidMove(
-        selectedChessPiece,
-        targetPiece,
-        currentPosition,
-        newPosition
-      )
-    ) {
-      return; // Error messages are handled within isValidMove
-    }
-
-    this.executeMove(selectedChessPiece, targetPiece, newPosition);
-    this.finalizeMove();
-    console.log(this.isCheck());
   }
   pieceCaptured(capturingPiece, capturedPiece) {
     // Remove the captured piece from the board
@@ -394,7 +381,9 @@ export default class Gamelogic extends ChessboardObserver {
 
     this.executeMove(selectedChessPiece, targetPiece, newPosition);
     this.finalizeMove();
+
     console.log(this.isCheck());
+    // console.log(this.isCheckMate());
   }
 
   simulateMove(piece, newPosition) {

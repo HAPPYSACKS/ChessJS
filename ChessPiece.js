@@ -38,12 +38,20 @@ export default class chessPiece {
   }
 
   isValidMove(targetPosition) {
-    let possibleMoves = this.returnPossibleMoves();
+    // Check if targetPosition is valid
+    if (
+      !targetPosition ||
+      !this.isInBounds(targetPosition.row, targetPosition.col)
+    ) {
+      return false;
+    }
 
+    let possibleMoves = this.returnPossibleMoves();
     return possibleMoves.some(
       (move) =>
         move.row === targetPosition.row && move.col === targetPosition.col
     );
+
   }
 
   isInBounds(row, col) {
