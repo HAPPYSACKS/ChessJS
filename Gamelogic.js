@@ -127,7 +127,6 @@ export default class Gamelogic extends ChessboardObserver {
     this.startTimer();
     this.chessboard.renderBoard();
   }
-
   isCheck() {
     const kingPosition = this.findKing(this.currentPlayer);
     const opponentColor = this.currentPlayer === "white" ? "black" : "white";
@@ -135,16 +134,28 @@ export default class Gamelogic extends ChessboardObserver {
     for (let row = 0; row < 8; row++) {
       for (let col = 0; col < 8; col++) {
         const piece = this.chessboard.findPieceAt(row, col);
-        if (
-          piece &&
-          piece.color === opponentColor &&
-          piece.isValidMove(kingPosition)
-        ) {
-          return true;
+        if (piece && piece.color === opponentColor) {
+          // Check if piece can legally move to the king's position
+          if (this.canMoveToPosition(piece, kingPosition, { row, col })) {
+            return true;
+          }
         }
       }
     }
     return false;
+  }
+
+  canMoveToPosition(piece, targetPosition, currentPosition) {
+    if (piece instanceof Knight) {
+      // Knights can jump over pieces
+      return piece.isValidMove(targetPosition);
+    } else {
+      // Check for intervening pieces for other piece types
+      return (
+        piece.isValidMove(targetPosition) &&
+        !this.hasInterveningPieces(currentPosition, targetPosition)
+      );
+    }
   }
 
   findKing(playerColor) {
@@ -339,5 +350,58 @@ export default class Gamelogic extends ChessboardObserver {
     }
 
     return false;
+  }
+
+  movePiece(currentPosition, newPosition) {
+    const selectedChessPiece = this.chessboard.findPieceAt(
+      currentPosition.row,
+      currentPosition.col
+    );
+
+    if (!this.isPlayerTurn(selectedChessPiece)) {
+      console.error("It's not your turn!");
+      return;
+    }
+
+    const targetPiece = this.chessboard.findPieceAt(
+      newPosition.row,
+      newPosition.col
+    );
+
+    if (
+      !this.isValidMove(
+        selectedChessPiece,
+        targetPiece,
+        currentPosition,
+        newPosition
+      )
+    ) {
+      return;
+    }
+
+    // Simulate the move and check if it results in check
+    const originalPosition = { ...selectedChessPiece.position };
+    this.updatePiecePosition(selectedChessPiece, newPosition);
+
+    if (this.isCheck()) {
+      console.error(
+        "Cannot make a move that leaves or puts your king in check."
+      );
+      // Revert the move
+      this.updatePiecePosition(selectedChessPiece, originalPosition);
+      return;
+    }
+
+    this.executeMove(selectedChessPiece, targetPiece, newPosition);
+    this.finalizeMove();
+    console.log(this.isCheck());
+  }
+
+  simulateMove(piece, newPosition) {
+    const originalPosition = { ...piece.position };
+    this.updatePiecePosition(piece, newPosition);
+    const isInCheck = this.isCheck();
+    this.updatePiecePosition(piece, originalPosition);
+    return isInCheck;
   }
 }
