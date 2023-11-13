@@ -67,6 +67,74 @@ export default class Gamelogic extends ChessboardObserver {
 
     return true;
   }
+  isCheckMate() {
+    if (!this.isCheck()) {
+      return false;
+    }
+
+    const playerPieces = this.getAllPiecesForCurrentPlayer();
+
+    for (const piece of playerPieces) {
+      const legalMoves = this.filterLegalMoves(
+        piece,
+        piece.returnPossibleMoves()
+      );
+
+      for (const move of legalMoves) {
+        if (this.simulateMove(piece, move)) {
+          return false; // Not checkmate since we have at least one legal move
+        }
+      }
+    }
+
+    return true; // No legal moves to remove the check, so it's checkmate.
+  }
+  filterLegalMoves(piece, possibleMoves) {
+    return possibleMoves.filter((move) => {
+      // Verify the move is within bounds
+      if (!this.isInBounds(move.row, move.col)) {
+        return false;
+      }
+
+      // If there are intervening pieces in the way for non-knight pieces, filter out the move
+      if (
+        !(piece instanceof Knight) &&
+        this.hasInterveningPieces(piece.position, move)
+      ) {
+        return false;
+      }
+
+      // If the target square is occupied by an ally piece, filter out the move
+      const targetPiece = this.chessboard.findPieceAt(move.row, move.col);
+      if (targetPiece && piece.color === targetPiece.color) {
+        return false;
+      }
+
+      // If the target square is occupied by an enemy piece, it's only valid if it's a capture move
+      if (targetPiece && piece.color !== targetPiece.color) {
+        return piece.canCapture(move);
+      }
+
+      // If the square is empty, it's a valid move
+      return true;
+    });
+  }
+
+  isInBounds(row, col) {
+    return row >= 0 && row < 8 && col >= 0 && col < 8;
+  }
+  getAllPiecesForCurrentPlayer() {
+    const pieces = [];
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const piece = this.chessboard.findPieceAt(row, col);
+        if (piece && piece.color === this.currentPlayer) {
+          pieces.push(piece);
+        }
+      }
+    }
+    return pieces;
+  }
 
   isValidPawnMove(pawn, targetPiece, currentPosition, newPosition) {
     // Determine if the move is a forward move or a capture
@@ -351,7 +419,7 @@ export default class Gamelogic extends ChessboardObserver {
     this.finalizeMove();
 
     console.log(this.isCheck());
-    // console.log(this.isCheckMate());
+    console.log(this.isCheckMate());
   }
 
   simulateMove(piece, newPosition) {
