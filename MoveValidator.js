@@ -1,4 +1,8 @@
-// MoveValidator.js
+// <!-- Course: SENG 513 -->
+// <!-- Date: NOV 13, 2023 -->
+// <!-- Assignment 3 -->
+// <!-- Name: Eric Mao -->
+// <!-- UCID: 30120909 -->
 import ChessUtils from "./ChessUtils.js";
 
 export default class MoveValidator {

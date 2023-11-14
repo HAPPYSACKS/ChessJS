@@ -1,3 +1,8 @@
+// <!-- Course: SENG 513 -->
+// <!-- Date: NOV 13, 2023 -->
+// <!-- Assignment 3 -->
+// <!-- Name: Eric Mao -->
+// <!-- UCID: 30120909 -->
 import Observable from "./Observerable.js";
 export default class ChessboardObservable extends Observable {
   observers;

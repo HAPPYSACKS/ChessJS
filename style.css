@@ -1,3 +1,8 @@
+/* <!-- Course: SENG 513 -->
+<!-- Date: NOV 13, 2023 -->
+<!-- Assignment 3 -->
+<!-- Name: Eric Mao -->
+<!-- UCID: 30120909 --> */
 body {
   font-family: sans-serif;
   background-color: #35363a;
@@ -7,8 +12,8 @@ body {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  width: 75vh; /* I use vh because height not touched */
-  height: 75vh; /* I use vh because height not touched */
+  width: 75vh; /* I use vh because height not touched when resizing window */
+  height: 75vh; /* I use vh because height not touched when resizing window */
   max-width: 80vw;
   padding-bottom: 1.4vh;
   padding-top: 1.4vh;
@@ -110,6 +115,8 @@ body {
   position: relative;
 }
 
+/* Written by AI */
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -124,6 +131,8 @@ body {
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
+/* Written by AI */
+
 /* Modal Content */
 .modal-content {
   position: relative;
@@ -134,6 +143,8 @@ body {
   width: 80%; /* Could be more or less, depending on screen size */
   max-width: 600px; /* Maximum width */
 }
+
+/* Written by AI */
 
 /* The Close Button */
 .close {
@@ -150,15 +161,15 @@ body {
   cursor: pointer;
 }
 
-/* Victory Message */
+
 #victory-message {
   text-align: center;
-  font-size: 2em; /* Big text */
+  font-size: 2em; 
   margin-top: 20px;
 }
 
 .highlighted {
-  box-shadow: 0 0 10px 3px #ffeb3b; /* a yellow glow */
+  box-shadow: 0 0 10px 3px #ffeb3b; 
   z-index: 1;
 }
 
@@ -169,7 +180,7 @@ body {
   margin: -5px;
 }
 
-/* Alternate color for square spaces */
+
 
 #chessboard .square:nth-child(odd):nth-child(-n + 9) {
   background-color: #fff2d8;

@@ -1,3 +1,8 @@
+// <!-- Course: SENG 513 -->
+// <!-- Date: NOV 13, 2023 -->
+// <!-- Assignment 3 -->
+// <!-- Name: Eric Mao -->
+// <!-- UCID: 30120909 -->
 export default class chessPiece {
   position;
   color;
@@ -21,10 +26,6 @@ export default class chessPiece {
   }
 
   returnPossibleMoves() {
-    // Basic logic or overridden by derived classes
-  }
-
-  isValidMove(targetPosition) {
     // Basic logic or overridden by derived classes
   }
 

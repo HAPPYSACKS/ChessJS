@@ -1,11 +1,11 @@
+
+// <!-- Course: SENG 513 -->
+// <!-- Date: NOV 13, 2023 -->
+// <!-- Assignment 3 -->
+// <!-- Name: Eric Mao -->
+// <!-- UCID: 30120909 -->
+
 // Handles gamerules, player turns, and checks for specific states like check, checkmate, or stalemate.
-
-// TODO
-// Strange pawn movement, when adjacent to another pawn, can move diagnoally
-// Black capture area strange,
-// capture area can't handle entire board.
-// Adjust pawn first move accordingly
-
 import ChessboardObserver from "./ChessboardObserver.js";
 import Knight from "./Knight.js";
 import Pawn from "./Pawn.js";
@@ -56,7 +56,7 @@ export default class Gamelogic extends ChessboardObserver {
     }
 
     if (this.isAllyPiece(targetPiece, selectedChessPiece)) {
-      console.error("Cannot capture your own piece!");
+      // console.error("Cannot capture your own piece!");
       return false;
     }
 
@@ -64,7 +64,7 @@ export default class Gamelogic extends ChessboardObserver {
       !(selectedChessPiece instanceof Knight) &&
       this.hasInterveningPieces(currentPosition, newPosition)
     ) {
-      console.error("Cannot move through other pieces!");
+      // console.error("Cannot move through other pieces!");
       return false;
     }
 
@@ -85,13 +85,16 @@ export default class Gamelogic extends ChessboardObserver {
 
       for (const move of legalMoves) {
         if (this.simulateMove(piece, move)) {
-          return false; // Not checkmate since we have at least one legal move
+          return false; // not checkmate since we have at least one legal move
         }
       }
     }
 
-    return true; // No legal moves to remove the check, so it's checkmate.
+    return true; // no legal moves to remove the check, so it's checkmate.
   }
+
+// Written by AI
+
   filterLegalMoves(piece, possibleMoves) {
     return possibleMoves.filter((move) => {
       // Verify the move is within bounds
@@ -126,6 +129,9 @@ export default class Gamelogic extends ChessboardObserver {
   isInBounds(row, col) {
     return row >= 0 && row < 8 && col >= 0 && col < 8;
   }
+
+// Written by AI
+
   getAllPiecesForCurrentPlayer() {
     const pieces = [];
     for (let row = 0; row < 8; row++) {
@@ -145,12 +151,12 @@ export default class Gamelogic extends ChessboardObserver {
     const isCaptureMove = !isForwardMove && !!targetPiece;
 
     if (isForwardMove && targetPiece) {
-      console.error("Pawns cannot move forward into occupied squares!");
+      // console.error("Pawns cannot move forward into occupied squares!");
       return false;
     }
 
     if (isCaptureMove && (!targetPiece || targetPiece.color === pawn.color)) {
-      console.error("Invalid pawn capture!");
+      // console.error("Invalid pawn capture!");
       return false;
     }
 
@@ -244,7 +250,7 @@ export default class Gamelogic extends ChessboardObserver {
       for (let col = 0; col < 8; col++) {
         const piece = this.chessboard.findPieceAt(row, col);
         if (piece && piece.color === opponentColor) {
-          // Check if piece can legally move to the king's position
+          // Check if a piece can legally move to the king's position
           if (this.canMoveToPosition(piece, kingPosition, { row, col })) {
             return true;
           }
@@ -262,10 +268,8 @@ export default class Gamelogic extends ChessboardObserver {
       );
     }
     if (piece instanceof Knight) {
-      // Knights can jump over pieces
       return piece.isValidMove(targetPosition);
     } else {
-      // Check for intervening pieces for other piece types
       return (
         piece.isValidMove(targetPosition) &&
         !this.hasInterveningPieces(currentPosition, targetPosition)
@@ -303,11 +307,10 @@ export default class Gamelogic extends ChessboardObserver {
     const whitePlayerElement = document.getElementById("player-top");
     const blackPlayerElement = document.getElementById("player-bottom");
 
-    // Remove the highlight from both players first
+
     whitePlayerElement.classList.remove("active-player");
     blackPlayerElement.classList.remove("active-player");
 
-    // Add the highlight to the current player
     if (this.currentPlayer === "white") {
       whitePlayerElement.classList.add("active-player");
     } else {
@@ -320,11 +323,13 @@ export default class Gamelogic extends ChessboardObserver {
   }
 
   promotePawn() {
-    //     After a pawn moves, check its rank.
+    // After a pawn moves, check its rank.
     // If it's a white pawn on the 8th rank or a black pawn on the 1st rank, then it's eligible for promotion.
     // Prompt the player to choose a piece for promotion: queen, rook, bishop, or knight.
     // Replace the pawn on the board with the chosen piece.
   }
+
+  // Written by AI
 
   startTimer() {
     // Ensure any existing timer is cleared first
@@ -368,11 +373,14 @@ export default class Gamelogic extends ChessboardObserver {
     }, 1000);
   }
 
+  // Written by AI
+
   stopTimer() {
     if (this.timer) {
       clearInterval(this.timer);
     }
   }
+
   pieceCaptured(capturingPiece, capturedPiece) {
     // Remove the captured piece from the board
     console.log(
@@ -419,6 +427,7 @@ export default class Gamelogic extends ChessboardObserver {
     // Append created image to capture area.
     displayArea.appendChild(pieceImg);
   }
+
   hasInterveningPieces(start, end) {
     const direction = {
       x: start.col < end.col ? 1 : start.col > end.col ? -1 : 0,
@@ -448,7 +457,7 @@ export default class Gamelogic extends ChessboardObserver {
     );
 
     if (!this.isPlayerTurn(selectedChessPiece)) {
-      console.error("It's not your turn!");
+      // console.error("It's not your turn!");
       return;
     }
 
@@ -513,10 +522,10 @@ export default class Gamelogic extends ChessboardObserver {
     // Revert the board to the original state
     this.updatePiecePosition(piece, originalPosition);
     if (captured) {
-      this.chessboard.board[captured.row][captured.col] = targetPiece; // Put the captured piece back
+      this.chessboard.board[captured.row][captured.col] = targetPiece; 
     }
 
-    // Return whether the move is safe (i.e., not resulting in check)
+    // Return whether the move is safe (ex. not resulting in check)
     return !isInCheckAfterMove;
   }
 }
