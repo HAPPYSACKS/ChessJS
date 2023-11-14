@@ -10,6 +10,8 @@ body {
   width: 75vh; /* I use vh because height not touched */
   height: 75vh; /* I use vh because height not touched */
   max-width: 80vw;
+  padding-bottom: 1.4vh;
+  padding-top: 1.4vh;
 }
 
 .wrapper {
@@ -158,6 +160,13 @@ body {
 .highlighted {
   box-shadow: 0 0 10px 3px #ffeb3b; /* a yellow glow */
   z-index: 1;
+}
+
+.active-player {
+  border: 2px solid #fff2d8;
+  border-radius: 5px;
+  padding: 5px;
+  margin: -5px;
 }
 
 /* Alternate color for square spaces */

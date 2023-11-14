@@ -1,7 +1,9 @@
 // Handles gamerules, player turns, and checks for specific states like check, checkmate, or stalemate.
 
 // TODO
-// Ensure pieces can't travel past each other (except knight)
+// Strange pawn movement, when adjacent to another pawn, can move diagnoally
+// Black capture area strange,
+// capture area can't handle entire board.
 // Adjust pawn first move accordingly
 
 import ChessboardObserver from "./ChessboardObserver.js";
@@ -140,7 +142,7 @@ export default class Gamelogic extends ChessboardObserver {
   isValidPawnMove(pawn, targetPiece, currentPosition, newPosition) {
     // Determine if the move is a forward move or a capture
     const isForwardMove = newPosition.col === currentPosition.col;
-    const isCaptureMove = !isForwardMove && targetPiece;
+    const isCaptureMove = !isForwardMove && !!targetPiece;
 
     if (isForwardMove && targetPiece) {
       console.error("Pawns cannot move forward into occupied squares!");
@@ -149,6 +151,12 @@ export default class Gamelogic extends ChessboardObserver {
 
     if (isCaptureMove && (!targetPiece || targetPiece.color === pawn.color)) {
       console.error("Invalid pawn capture!");
+      return false;
+    }
+
+    // can't move diagnoally
+
+    if (!isCaptureMove && targetPiece === null && !isForwardMove) {
       return false;
     }
 
@@ -281,6 +289,23 @@ export default class Gamelogic extends ChessboardObserver {
 
   switchPlayer() {
     this.currentPlayer = this.currentPlayer === "white" ? "black" : "white";
+    this.highlightActivePlayer();
+  }
+
+  highlightActivePlayer() {
+    const whitePlayerElement = document.getElementById("player-top");
+    const blackPlayerElement = document.getElementById("player-bottom");
+
+    // Remove the highlight from both players first
+    whitePlayerElement.classList.remove("active-player");
+    blackPlayerElement.classList.remove("active-player");
+
+    // Add the highlight to the current player
+    if (this.currentPlayer === "white") {
+      whitePlayerElement.classList.add("active-player");
+    } else {
+      blackPlayerElement.classList.add("active-player");
+    }
   }
 
   onPieceCaptured(data) {
