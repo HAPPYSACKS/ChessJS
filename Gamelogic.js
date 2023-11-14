@@ -480,16 +480,15 @@ export default class Gamelogic extends ChessboardObserver {
       this.updatePiecePosition(selectedChessPiece, originalPosition);
       return;
     }
+    
 
     this.executeMove(selectedChessPiece, targetPiece, newPosition);
     this.finalizeMove();
 
-    console.log(this.isCheck());
     if (this.isCheckMate()) {
       this.endGame("checkmate");
       return; // Exit the method to avoid further game processing
     }
-    console.log(this.isCheckMate());
   }
 
   simulateMove(piece, newPosition) {
