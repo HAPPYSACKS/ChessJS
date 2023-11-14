@@ -160,6 +160,7 @@ export default class Gamelogic extends ChessboardObserver {
       return false;
     }
 
+    pawn.firstMove = false;
     return true;
   }
 
