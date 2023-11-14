@@ -255,6 +255,12 @@ export default class Gamelogic extends ChessboardObserver {
   }
 
   canMoveToPosition(piece, targetPosition, currentPosition) {
+    if (piece instanceof Pawn) {
+      return (
+        piece.isValidCapture(targetPosition) &&
+        !this.hasInterveningPieces(currentPosition, targetPosition)
+      );
+    }
     if (piece instanceof Knight) {
       // Knights can jump over pieces
       return piece.isValidMove(targetPosition);
